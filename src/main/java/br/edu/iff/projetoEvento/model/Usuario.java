@@ -1,6 +1,7 @@
 package br.edu.iff.projetoEvento.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 
 public abstract class Usuario implements Serializable{
@@ -60,5 +61,30 @@ public abstract class Usuario implements Serializable{
 
     public void setContato(Contato contato) {
         this.contato = contato;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 71 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }       
 }

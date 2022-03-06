@@ -4,6 +4,7 @@ package br.edu.iff.projetoEvento.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 
 public class Evento implements Serializable {
@@ -109,6 +110,28 @@ public class Evento implements Serializable {
     public void setIngressos(List<Ingresso> ingressos) {
         this.ingressos = ingressos;
     }
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.ID);
+        return hash;
+    }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Evento other = (Evento) obj;
+        if (!Objects.equals(this.ID, other.ID)) {
+            return false;
+        }
+        return true;
+    }
 }

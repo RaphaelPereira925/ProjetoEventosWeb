@@ -2,7 +2,7 @@
 package br.edu.iff.projetoEvento.model;
 
 import java.io.Serializable;
-
+import java.util.Objects;
 
 public class Contato implements Serializable{    
     private static final long serialVersionUID = 1L;
@@ -34,6 +34,29 @@ public class Contato implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 13 * hash + Objects.hashCode(this.cel);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Contato other = (Contato) obj;
+        if (!Objects.equals(this.cel, other.cel)) {
+            return false;
+        }
+        return true;
+    }
 
 }
