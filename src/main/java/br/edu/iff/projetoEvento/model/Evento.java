@@ -2,6 +2,7 @@
 package br.edu.iff.projetoEvento.model;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +18,7 @@ public class Evento implements Serializable {
     private String qtdeIngresso;
     private String status;
     private Calendar data;
-    private Calendar horario;
+    private LocalTime horario;
 
     private Endereco endereco;
     private Contato contato;
@@ -79,11 +80,11 @@ public class Evento implements Serializable {
         this.data = data;
     }
 
-    public Calendar getHorario() {
+    public LocalTime getHorario() {
         return horario;
     }
 
-    public void setHorario(Calendar horario) {
+    public void setHorario(LocalTime horario) {
         this.horario = horario;
     }
 
