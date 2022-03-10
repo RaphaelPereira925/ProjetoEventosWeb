@@ -34,10 +34,13 @@ public class Contato implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 13 * hash + Objects.hashCode(this.cel);
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.cel);
+        hash = 17 * hash + Objects.hashCode(this.tel);
+        hash = 17 * hash + Objects.hashCode(this.email);
         return hash;
     }
 
@@ -56,7 +59,13 @@ public class Contato implements Serializable{
         if (!Objects.equals(this.cel, other.cel)) {
             return false;
         }
+        if (!Objects.equals(this.tel, other.tel)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
         return true;
     }
-
+    
 }

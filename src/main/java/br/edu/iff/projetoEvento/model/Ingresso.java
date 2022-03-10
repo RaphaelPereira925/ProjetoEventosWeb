@@ -10,6 +10,10 @@ public class Ingresso implements Serializable{
     private Long ID;
     private TipoIngressoEnum tipoIngresso;
     private float valor;
+    
+    private Evento evento;
+    private Participante participante;
+    private Funcionario funcionario;
 
     public Long getID() {
         return ID;
@@ -34,10 +38,37 @@ public class Ingresso implements Serializable{
     public void setValor(float valor) {
         this.valor = valor;
     }
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
+    public Participante getParticipante() {
+        return participante;
+    }
+
+    public void setParticipante(Participante participante) {
+        this.participante = participante;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    
+        
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.ID);
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.ID);
         return hash;
     }
 
@@ -58,4 +89,5 @@ public class Ingresso implements Serializable{
         }
         return true;
     }
+    
 }

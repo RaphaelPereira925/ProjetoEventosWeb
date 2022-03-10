@@ -7,7 +7,7 @@ import java.util.Objects;
 public abstract class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
     
-    private long id;
+    private long ID;
     private String nome;
     private String CPF;
     private String RG;
@@ -16,11 +16,11 @@ public abstract class Usuario implements Serializable{
     private Contato contato;
 
     public long getId() {
-        return id;
+        return ID;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long ID) {
+        this.ID = ID;
     }
 
     public String getNome() {
@@ -62,11 +62,11 @@ public abstract class Usuario implements Serializable{
     public void setContato(Contato contato) {
         this.contato = contato;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 29 * hash + (int) (this.ID ^ (this.ID >>> 32));
         return hash;
     }
 
@@ -82,9 +82,10 @@ public abstract class Usuario implements Serializable{
             return false;
         }
         final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (this.ID != other.ID) {
             return false;
         }
         return true;
-    }       
+    }
+    
 }

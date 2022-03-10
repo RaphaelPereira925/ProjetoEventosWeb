@@ -52,14 +52,15 @@ public class Endereco implements Serializable{
     public void setCEP(String CEP) {
         this.CEP = CEP;
     }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.rua);
-        hash = 47 * hash + this.numero;
-        hash = 47 * hash + Objects.hashCode(this.bairro);
-        hash = 47 * hash + Objects.hashCode(this.cidade);
-        hash = 47 * hash + Objects.hashCode(this.CEP);
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.rua);
+        hash = 67 * hash + this.numero;
+        hash = 67 * hash + Objects.hashCode(this.bairro);
+        hash = 67 * hash + Objects.hashCode(this.cidade);
+        hash = 67 * hash + Objects.hashCode(this.CEP);
         return hash;
     }
 
@@ -92,5 +93,5 @@ public class Endereco implements Serializable{
         }
         return true;
     }
-
+    
 }

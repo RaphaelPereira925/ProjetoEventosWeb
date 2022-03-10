@@ -3,27 +3,25 @@ package br.edu.iff.projetoEvento.model;
 
 import java.io.Serializable;
 import java.time.LocalTime;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
 
-public class Evento implements Serializable {
+public class Evento implements Serializable{
     private static final long serialVersionUID = 1L;
     
     private Long ID;
     private String nome;
     private String organizacao;
-    private String espaco;
-    private String qtdeIngresso;
-    private String status;
-    private Calendar data;
-    private LocalTime horario;
+    private int qtdeIngresso;
+    private TipoStatusEventoEnum status;
+    private LocalTime dataHora;
 
     private Endereco endereco;
     private Contato contato;
     private List<Ingresso> ingressos;
-
+    
+    
     public Long getID() {
         return ID;
     }
@@ -48,44 +46,28 @@ public class Evento implements Serializable {
         this.organizacao = organizacao;
     }
 
-    public String getEspaco() {
-        return espaco;
-    }
-
-    public void setEspaco(String espaco) {
-        this.espaco = espaco;
-    }
-
-    public String getQtdeIngresso() {
+    public int getQtdeIngresso() {
         return qtdeIngresso;
     }
 
-    public void setQtdeIngresso(String qtdeIngresso) {
+    public void setQtdeIngresso(int qtdeIngresso) {
         this.qtdeIngresso = qtdeIngresso;
     }
 
-    public String getStatus() {
+    public TipoStatusEventoEnum getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TipoStatusEventoEnum status) {
         this.status = status;
     }
 
-    public Calendar getData() {
-        return data;
+    public LocalTime getDataHora() {
+        return dataHora;
     }
 
-    public void setData(Calendar data) {
-        this.data = data;
-    }
-
-    public LocalTime getHorario() {
-        return horario;
-    }
-
-    public void setHorario(LocalTime horario) {
-        this.horario = horario;
+    public void setDataHora(LocalTime dataHora) {
+        this.dataHora = dataHora;
     }
 
     public Endereco getEndereco() {
@@ -111,10 +93,11 @@ public class Evento implements Serializable {
     public void setIngressos(List<Ingresso> ingressos) {
         this.ingressos = ingressos;
     }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.ID);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.ID);
         return hash;
     }
 
@@ -135,4 +118,5 @@ public class Evento implements Serializable {
         }
         return true;
     }
+    
 }

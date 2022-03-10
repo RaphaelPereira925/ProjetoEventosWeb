@@ -5,5 +5,6 @@ package br.edu.iff.projetoEvento.model;
 public enum TipoIngressoEnum {
     PIPOCA,
     VIP, 
-    CAMAROTE;
+    CAMAROTE,
+    NAO_APLICAVEL;
 }
