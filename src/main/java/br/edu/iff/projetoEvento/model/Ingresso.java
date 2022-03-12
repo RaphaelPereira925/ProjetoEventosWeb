@@ -1,6 +1,8 @@
 
 package br.edu.iff.projetoEvento.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -10,6 +12,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Ingresso implements Serializable{
@@ -24,8 +28,17 @@ public class Ingresso implements Serializable{
     @Column(nullable = false)
     private float valor;
     
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(nullable = false)
     private Evento evento;
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(nullable = false)
     private Participante participante;
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(nullable = false)
     private Funcionario funcionario;
 
     public Long getID() {

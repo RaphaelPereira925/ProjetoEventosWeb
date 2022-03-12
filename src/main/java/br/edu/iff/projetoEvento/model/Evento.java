@@ -1,17 +1,25 @@
 
 package br.edu.iff.projetoEvento.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -34,10 +42,15 @@ public class Evento implements Serializable{
     @Column(nullable = false, updatable = false, length = 20)
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dataHora;
-
+    @Embedded
     private Endereco endereco;
+    @Embedded
     private Contato contato;
-    private List<Ingresso> ingressos;
+    @JsonManagedReference
+    @ElementCollection(fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(nullable = false, name = "evento_id")
+    private List<Ingresso> ingressos = new ArrayList<>();
     
     
     public Long getID() {

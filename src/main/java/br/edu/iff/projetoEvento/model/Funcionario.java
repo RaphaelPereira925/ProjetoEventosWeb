@@ -1,9 +1,14 @@
 
 package br.edu.iff.projetoEvento.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 
 @Entity
 public class  Funcionario extends Usuario{
@@ -11,8 +16,10 @@ public class  Funcionario extends Usuario{
     private String setor;
     @Column(nullable = false)
     private String senha;
-
-    private List<Ingresso> ingressos;
+    @JsonBackReference
+    @OneToMany(mappedBy = "funcionario")
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Ingresso> ingressos = new ArrayList<>();
 
     public String getSetor() {
         return setor;

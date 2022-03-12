@@ -3,13 +3,17 @@ package br.edu.iff.projetoEvento.model;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
     
@@ -23,7 +27,9 @@ public abstract class Usuario implements Serializable{
     @Column(nullable = false, unique = true, updatable = false, length = 12)
     private String RG;
 
+    @Embedded
     private Endereco endereco;
+    @Embedded
     private Contato contato;
 
     public long getId() {
