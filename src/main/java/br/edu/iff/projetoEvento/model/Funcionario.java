@@ -2,10 +2,14 @@
 package br.edu.iff.projetoEvento.model;
 
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
+@Entity
 public class  Funcionario extends Usuario{
-
+    @Column(nullable = false, length = 50)
     private String setor;
+    @Column(nullable = false)
     private String senha;
 
     private List<Ingresso> ingressos;

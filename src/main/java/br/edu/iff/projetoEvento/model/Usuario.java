@@ -2,14 +2,25 @@ package br.edu.iff.projetoEvento.model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
+@Entity
 public abstract class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
     
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long ID;
+    @Column(nullable = false, unique = false, updatable = true, length = 150) //Professor não sei se precisa colocar o updatable aqui. Coloquei pois é um atributo que pode ser alterado segundo minhas regras de negócio.
     private String nome;
+    @Column(nullable = false, unique = true, updatable = false, length = 14)
     private String CPF;
+    @Column(nullable = false, unique = true, updatable = false, length = 12)
     private String RG;
 
     private Endereco endereco;

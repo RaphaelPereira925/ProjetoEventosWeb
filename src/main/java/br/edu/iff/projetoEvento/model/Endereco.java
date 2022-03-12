@@ -3,14 +3,22 @@ package br.edu.iff.projetoEvento.model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
+@Embeddable
 public class Endereco implements Serializable{
     private static final long serialVersionUID = 1L;
     
+    @Column(nullable = false, updatable = true, length = 100)
     private String rua;
+    @Column(nullable = false, updatable = true)
     private int numero;
+    @Column(nullable = false, updatable = true, length = 50)
     private String bairro;
+    @Column(nullable = false, updatable = true, length = 100)
     private String cidade;
+    @Column(nullable = false, updatable = true, length = 9)
     private String CEP;
 
     public String getRua() {

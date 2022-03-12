@@ -2,20 +2,38 @@
 package br.edu.iff.projetoEvento.model;
 
 import java.io.Serializable;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
+@Entity
 public class Evento implements Serializable{
     private static final long serialVersionUID = 1L;
-    
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long ID;
+    @Column(nullable = false, updatable = true, length = 100)
     private String nome;
+    @Column(nullable = false, updatable = true, length = 100)
     private String organizacao;
+    @Column(nullable = false)
     private int qtdeIngresso;
+    @Column(nullable = false, updatable = true, length = 20)
+    @Enumerated (EnumType.STRING)
     private TipoStatusEventoEnum status;
-    private LocalTime dataHora;
+    @Column(nullable = false, updatable = false, length = 20)
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime dataHora;
 
     private Endereco endereco;
     private Contato contato;
@@ -62,13 +80,15 @@ public class Evento implements Serializable{
         this.status = status;
     }
 
-    public LocalTime getDataHora() {
+    public LocalDateTime getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(LocalTime dataHora) {
+    public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
     }
+
+    
 
     public Endereco getEndereco() {
         return endereco;
