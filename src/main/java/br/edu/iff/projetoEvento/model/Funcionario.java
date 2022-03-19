@@ -2,6 +2,7 @@
 package br.edu.iff.projetoEvento.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ public class  Funcionario extends Usuario{
     private String setor;
     @Column(nullable = false)
     private String senha;
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "funcionario")
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Ingresso> ingressos = new ArrayList<>();

@@ -40,16 +40,13 @@ public class Evento implements Serializable{
     @Enumerated (EnumType.STRING)
     private TipoStatusEventoEnum status;
     @Column(nullable = false, updatable = false, length = 20)
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dataHora;
     @Embedded
     private Endereco endereco;
     @Embedded
     private Contato contato;
     @JsonManagedReference
-    @ElementCollection(fetch = FetchType.EAGER)
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(nullable = false, name = "evento_id")
+    @OneToMany(orphanRemoval = true)
     private List<Ingresso> ingressos = new ArrayList<>();
     
     

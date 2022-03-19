@@ -2,6 +2,7 @@
 package br.edu.iff.projetoEvento.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Objects;
@@ -28,7 +29,7 @@ public class Ingresso implements Serializable{
     @Column(nullable = false)
     private float valor;
     
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(nullable = false)
     private Evento evento;

@@ -2,6 +2,7 @@
 package br.edu.iff.projetoEvento.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -14,7 +15,7 @@ import javax.persistence.OneToMany;
 public class Participante extends Usuario{
     @Column(nullable = false, unique = true, updatable = false, length = 200) //Professor fui colocando essas marcações para seguir o que foi proposto nas minhas regras de negócio.
     private String documentos;
-    @JsonBackReference
+    @JsonIgnore
     @ElementCollection(fetch = FetchType.EAGER)
     @OneToMany(mappedBy = "participante")
     private List<Ingresso> ingressos = new ArrayList<>();
