@@ -1,11 +1,13 @@
 
 package br.edu.iff.projetoEvento.model;
 
+import br.edu.iff.projetoEvento.annotation.CelValidation;
+import br.edu.iff.projetoEvento.annotation.EmailValidation;
+import br.edu.iff.projetoEvento.annotation.TelValidation;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
@@ -16,13 +18,15 @@ public class Contato implements Serializable{
     @Column(nullable = false, updatable = true, length = 14)
     @NotBlank(message = "O campo cel é obrigatório.")
     @Length(min = 13, max = 14, message = "O campo cel deve ter 13 ou 14 caracteres. Ex.: (99)99999-9999 ou (99)9999-9999")
+    @CelValidation(message = "Celular inválido.")
     private String cel;
     @Column(nullable = true, updatable = true, length = 13)
     @Length(min = 13, max = 13, message = "O campo tel deve ter exatamente 13 caracteres. Ex.: (99)9999-9999")
+    @TelValidation(message = "Telefone inválido.")
     private String tel;
     @Column(nullable = false, updatable = true, length = 100)
     @NotBlank(message = "O campo Email é obrigatório.")
-    @Email()
+    @EmailValidation(message = "Email inválido.")
     private String email;
 
     public String getCel() {

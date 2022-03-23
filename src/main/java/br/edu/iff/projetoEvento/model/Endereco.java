@@ -1,6 +1,7 @@
 
 package br.edu.iff.projetoEvento.model;
 
+import br.edu.iff.projetoEvento.annotation.CEPValidation;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -31,6 +32,7 @@ public class Endereco implements Serializable{
     @Column(nullable = false, updatable = true, length = 9)
     @NotBlank(message = "O campo CEP é obrigatório.")
     @Length(min = 9, max = 9, message = "O campo CEP deve ter no extamente 9 caracteres. Ex.: 99999-999")
+    @CEPValidation(message = "CEP inválido.")
     private String CEP;
 
     public String getRua() {

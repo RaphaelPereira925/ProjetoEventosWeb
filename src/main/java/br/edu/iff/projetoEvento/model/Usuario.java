@@ -1,5 +1,7 @@
 package br.edu.iff.projetoEvento.model;
 
+//import br.edu.iff.projetoEvento.annotation.CPFValidation;
+import br.edu.iff.projetoEvento.annotation.RGValidation;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -32,10 +34,12 @@ public abstract class Usuario implements Serializable{
     @Column(nullable = false, unique = true, updatable = false, length = 14)
     @NotBlank(message = "O campo CPF é obrigatório.")
     @CPF(message = "CPF inválido.")
+    //@CPFValidation(message = "CPF inválido") Coloquei minha própria anotação que verifica o formato, não sei se fica redundante.
     private String CPF;
     @Column(nullable = false, unique = true, updatable = false, length = 12)
     @NotBlank(message = "O campo RG é obrigatório.")
     //Professor não consegui encontrar uma anotação para validação de RG.
+    @RGValidation(message = "RG inválido")
     private String RG;
 
     @Embedded
