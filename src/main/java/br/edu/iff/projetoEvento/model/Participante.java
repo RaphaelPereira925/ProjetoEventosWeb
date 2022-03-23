@@ -10,10 +10,12 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Participante extends Usuario{
     @Column(nullable = false, unique = true, updatable = false, length = 200) //Professor fui colocando essas marcações para seguir o que foi proposto nas minhas regras de negócio.
+    @Length(max = 200, message = "O campo Documentos deve ter no máximo 200 caracteres.")
     private String documentos;
     @JsonIgnore
     @ElementCollection(fetch = FetchType.EAGER)

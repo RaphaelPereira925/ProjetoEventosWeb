@@ -1,6 +1,7 @@
 
 package br.edu.iff.projetoEvento.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -18,10 +19,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -31,22 +37,39 @@ public class Evento implements Serializable{
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long ID;
     @Column(nullable = false, updatable = true, length = 100)
+    @NotBlank(message = "O campo nome é obrigatório.")
+    @Length(max = 100, message = "O campo nome deve ter no máximo 100 caracteres.")
     private String nome;
     @Column(nullable = false, updatable = true, length = 100)
+    @NotBlank(message = "O campo organizacao é obrigatório.")
+    @Length(max = 100, message = "O campo organizacao deve ter no máximo 100 caracteres.")
     private String organizacao;
     @Column(nullable = false)
+    @NotBlank(message = "O campo qtdeIngresso é obrigatório.")
+    @Digits(integer = 100000, fraction = 0, message = "A quantidade de ingressos deve ser um número inteiro.")//Coloquei um número de cem mil no integer devido considerar que alguns eventos podem ter lotação imensas, como 100 mil e por aí vai a depender do evento.
     private int qtdeIngresso;
     @Column(nullable = false, updatable = true, length = 20)
     @Enumerated (EnumType.STRING)
+    @NotNull(message = "Tipo de Status do Evento é um campo obrigatório.")
     private TipoStatusEventoEnum status;
     @Column(nullable = false, updatable = false, length = 20)
+    @NotNull(message = "Data e horário do evento são campos obrigatórios.")
+    @FutureOrPresent(message = "Data e horário devem ser no mínimo hoje ou em datas futuras.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime dataHora;
     @Embedded
+    @NotNull(message = "Campo endereço é obrigatório.")
+    @Valid
     private Endereco endereco;
     @Embedded
+    @NotNull(message = "Campo contato é obrigatório.")
+    @Valid
     private Contato contato;
     @JsonManagedReference
     @OneToMany(orphanRemoval = true)
+    @Size(min = 1, message = "O evento deve ter no mínimo 1 ingresso.")
+    @Valid
     private List<Ingresso> ingressos = new ArrayList<>();
     
     

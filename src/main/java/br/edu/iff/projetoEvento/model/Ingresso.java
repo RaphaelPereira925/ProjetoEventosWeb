@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Ingresso implements Serializable{
@@ -32,14 +34,17 @@ public class Ingresso implements Serializable{
     @JsonIgnore
     @ManyToOne
     @JoinColumn(nullable = false)
+    @NotBlank(message = "Campo evento é obrigatório.")
     private Evento evento;
     @JsonManagedReference
     @ManyToOne
+    @NotNull(message = "Campo participante é obrigatório.")
     @JoinColumn(nullable = false)
     private Participante participante;
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(nullable = false)
+    @NotNull(message = "Campo funcionario é obrigatório.")
     private Funcionario funcionario;
 
     public Long getID() {

@@ -10,6 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
 
 
 @Entity
@@ -21,15 +26,24 @@ public abstract class Usuario implements Serializable{
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long ID;
     @Column(nullable = false, unique = false, updatable = true, length = 150) //Professor não sei se precisa colocar o updatable aqui. Coloquei pois é um atributo que pode ser alterado segundo minhas regras de negócio.
+    @NotBlank(message = "O campo Nome é obrigatório.")
+    @Length(max = 150, message = "O campo Nome deve ter no máximo 150 caracteres.")
     private String nome;
     @Column(nullable = false, unique = true, updatable = false, length = 14)
+    @NotBlank(message = "O campo CPF é obrigatório.")
+    @CPF(message = "CPF inválido.")
     private String CPF;
     @Column(nullable = false, unique = true, updatable = false, length = 12)
+    @NotBlank(message = "O campo RG é obrigatório.")
+    //Professor não consegui encontrar uma anotação para validação de RG.
     private String RG;
 
     @Embedded
+    @NotNull(message = "O campo Endereço é obrigatório.")
+    @Valid
     private Endereco endereco;
     @Embedded
+    @Valid
     private Contato contato;
 
     public long getId() {
