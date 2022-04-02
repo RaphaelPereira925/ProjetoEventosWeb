@@ -1,14 +1,11 @@
 
 package br.edu.iff.projetoEvento.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
@@ -25,7 +22,6 @@ public class  Funcionario extends Usuario{
     private String senha;
     @JsonIgnore
     @OneToMany(mappedBy = "funcionario")
-    @ElementCollection(fetch = FetchType.EAGER)
     private List<Ingresso> ingressos = new ArrayList<>();
 
     public String getSetor() {

@@ -1,9 +1,7 @@
 
 package br.edu.iff.projetoEvento.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -36,12 +34,10 @@ public class Ingresso implements Serializable{
     @JoinColumn(nullable = false)
     @NotBlank(message = "Campo evento é obrigatório.")
     private Evento evento;
-    @JsonManagedReference
     @ManyToOne
     @NotNull(message = "Campo participante é obrigatório.")
     @JoinColumn(nullable = false)
     private Participante participante;
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(nullable = false)
     @NotNull(message = "Campo funcionario é obrigatório.")

@@ -1,14 +1,11 @@
 
 package br.edu.iff.projetoEvento.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.Length;
 
@@ -18,7 +15,6 @@ public class Participante extends Usuario{
     @Length(max = 200, message = "O campo Documentos deve ter no máximo 200 caracteres.")
     private String documentos;
     @JsonIgnore
-    @ElementCollection(fetch = FetchType.EAGER)
     @OneToMany(mappedBy = "participante")
     private List<Ingresso> ingressos = new ArrayList<>();
 

@@ -2,20 +2,16 @@
 package br.edu.iff.projetoEvento.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -66,10 +62,9 @@ public class Evento implements Serializable{
     @NotNull(message = "Campo contato é obrigatório.")
     @Valid
     private Contato contato;
-    @JsonManagedReference
-    @OneToMany(orphanRemoval = true)
+    //@JsonManagedReference
+    @OneToMany(orphanRemoval = true, mappedBy = "evento")
     @Size(min = 1, message = "O evento deve ter no mínimo 1 ingresso.")
-    @Valid
     private List<Ingresso> ingressos = new ArrayList<>();
     
     
