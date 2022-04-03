@@ -38,7 +38,6 @@ public abstract class Usuario implements Serializable{
     private String CPF;
     @Column(nullable = false, unique = true, updatable = false, length = 12)
     @NotBlank(message = "O campo RG é obrigatório.")
-    //Professor não consegui encontrar uma anotação para validação de RG.
     @RGValidation(message = "RG inválido")
     private String RG;
 
