@@ -1,6 +1,7 @@
 package br.edu.iff.projetoEvento.model;
 
 //import br.edu.iff.projetoEvento.annotation.CPFValidation;
+import br.edu.iff.projetoEvento.annotation.CPFValidation;
 import br.edu.iff.projetoEvento.annotation.RGValidation;
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,7 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CPF;
+//import org.hibernate.validator.constraints.br.CPF;
 
 
 @Entity
@@ -33,8 +34,8 @@ public abstract class Usuario implements Serializable{
     private String nome;
     @Column(nullable = false, unique = true, updatable = false, length = 14)
     @NotBlank(message = "O campo CPF é obrigatório.")
-    @CPF(message = "CPF inválido.")
-    //@CPFValidation(message = "CPF inválido") Coloquei minha própria anotação que verifica o formato, não sei se fica redundante.
+    //@CPF(message = "CPF inválido.")
+    @CPFValidation(message = "CPF inválido") //Coloquei minha própria anotação que verifica o formato, não sei se fica redundante.
     private String CPF;
     @Column(nullable = false, unique = true, updatable = false, length = 12)
     @NotBlank(message = "O campo RG é obrigatório.")

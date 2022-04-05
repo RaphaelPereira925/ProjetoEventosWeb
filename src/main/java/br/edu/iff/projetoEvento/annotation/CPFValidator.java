@@ -12,6 +12,7 @@ public class CPFValidator implements ConstraintValidator<CPFValidation, String>{
         if(value==null) return false;
         if(value.contains(" ")) return false;
         return value.matches("(^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$)");
+                              
     }
     
 }

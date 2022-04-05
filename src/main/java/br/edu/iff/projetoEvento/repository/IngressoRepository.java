@@ -2,7 +2,6 @@
 package br.edu.iff.projetoEvento.repository;
 
 import br.edu.iff.projetoEvento.model.Ingresso;
-import java.util.Calendar;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,7 +17,7 @@ public interface IngressoRepository extends JpaRepository<Ingresso, Long>{
     
     public List<Ingresso> findByFuncionarioId(Long funcionarioId, Pageable page);
     
-    public List<Ingresso> findByParticianteId(Long participanteId, Pageable page);
+    //Public List<Ingresso> findByParticianteId(Long participanteId, Pageable page);
     
     public List<Ingresso> findByParticipanteIdAndFuncionarioId(Long participanteId, Long funcionarioId, Pageable page);
 

@@ -43,7 +43,7 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         //Participante
         Participante p = new Participante();
         p.setNome("Larissa");
-        p.setCPF("042.120.654-43");
+        p.setCPF("433.504.690-19");
         p.setRG("12.203.952-6");
         
         Contato c = new Contato();
@@ -58,7 +58,7 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         e.setCidade("Indianópolis");
         e.setCEP("28090-000");
         
-        pariticipanteRepo.save(p);
+       pariticipanteRepo.save(e);
         
         //Funcionário
         
@@ -73,8 +73,7 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         cf.setCel("(79)99323-9489");
         cf.setTel("(79)3853-4456");
         cf.setEmail("kdamaceno@instituicao.com.br");
-        
-        
+
         Endereco ef = new Endereco();
         ef.setRua("Rua Quatro");
         ef.setNumero(531);
