@@ -1,6 +1,7 @@
 
 package br.edu.iff.projetoEvento.service;
 
+import br.edu.iff.projetoEvento.exception.NotFoundException;
 import br.edu.iff.projetoEvento.model.Participante;
 import br.edu.iff.projetoEvento.model.Usuario;
 import br.edu.iff.projetoEvento.repository.ParticipanteRepository;
@@ -34,7 +35,7 @@ public class ParticipanteService {
         
         Optional<Participante> resultado = repo.findById(ID);
         if (resultado.toString().isEmpty()){
-            throw new RuntimeException("Participante não encontrado.");
+            throw new NotFoundException("Participante não encontrado.");
         }
         return resultado.get();
     }

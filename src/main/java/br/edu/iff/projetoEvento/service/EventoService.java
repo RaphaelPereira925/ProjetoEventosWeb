@@ -1,6 +1,7 @@
 
 package br.edu.iff.projetoEvento.service;
 
+import br.edu.iff.projetoEvento.exception.NotFoundException;
 import br.edu.iff.projetoEvento.model.Evento;
 import br.edu.iff.projetoEvento.model.Ingresso;
 import br.edu.iff.projetoEvento.repository.EventoRepository;
@@ -29,7 +30,7 @@ public class EventoService {
         
         Optional<Evento> resultado = repo.findById(ID);
         if (resultado.toString().isEmpty()){
-            throw new RuntimeException("Evento não encontrado.");
+            throw new NotFoundException("Evento não encontrado.");
         }
         return resultado.get();
     }

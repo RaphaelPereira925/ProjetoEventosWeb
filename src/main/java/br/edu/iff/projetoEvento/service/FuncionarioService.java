@@ -1,11 +1,13 @@
 
 package br.edu.iff.projetoEvento.service;
 
+import br.edu.iff.projetoEvento.exception.NotFoundException;
 import br.edu.iff.projetoEvento.model.Funcionario;
 import br.edu.iff.projetoEvento.model.Usuario;
 import br.edu.iff.projetoEvento.repository.FuncionarioRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +30,7 @@ public class FuncionarioService {
         
         Optional<Funcionario> resultado = repo.findById(ID);
         if (resultado.toString().isEmpty()){
-            throw new RuntimeException("Funcionário não encontrado.");
+            throw new NotFoundException("Funcionário não encontrado.");
         }
         return resultado.get();
     }
@@ -38,7 +40,14 @@ public class FuncionarioService {
        verificaCPFCadastrado(f.getCPF());
        try{ 
         return repo.save(f);
-       }catch(Exception e){
+       }catch(Exception Ex){
+           Throwable t = Ex;
+            while (t.getCause() != null) {
+                t = t.getCause();
+                if (t instanceof ConstraintViolationException) {
+                    throw ((ConstraintViolationException) t);
+                }
+            }
            throw new RuntimeException("Falha ao salvar o funcionário.");
        }
     }
@@ -52,6 +61,13 @@ public class FuncionarioService {
             f.setSenha(obj.getSenha());
             return repo.save(f);
         } catch (Exception Ex) {
+            Throwable t = Ex;
+            while (t.getCause() != null) {
+                t = t.getCause();
+                if (t instanceof ConstraintViolationException) {
+                    throw ((ConstraintViolationException) t);
+                }
+            }
             throw new RuntimeException("Falha ao atualizar o Funcionário.");
         }
         
