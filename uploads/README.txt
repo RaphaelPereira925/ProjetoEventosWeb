@@ -1,0 +1,1 @@
+Pasta para salvar os documentos dos clientes.

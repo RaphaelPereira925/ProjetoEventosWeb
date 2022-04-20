@@ -2,6 +2,7 @@
 package br.edu.iff.projetoEvento.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
+@JsonIgnoreProperties(value = "senha", allowGetters = false, allowSetters = true)
 public class  Funcionario extends Usuario{
     @Column(nullable = false, length = 50)
     @NotBlank(message = "O campo setor é obrigatório.")

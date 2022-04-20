@@ -10,10 +10,11 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
+
 @Embeddable
 public class Endereco implements Serializable{
     private static final long serialVersionUID = 1L;
-    
+
     @Column(nullable = false, updatable = true, length = 100)
     @NotBlank(message = "O campo rua é obrigatório.")
     @Length(max = 100, message = "O campo rua deve ter no máximo 100 caracteres.")

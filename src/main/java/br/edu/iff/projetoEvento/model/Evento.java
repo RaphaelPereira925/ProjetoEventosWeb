@@ -2,6 +2,7 @@
 package br.edu.iff.projetoEvento.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class Evento implements Serializable{
     @NotNull(message = "Campo contato é obrigatório.")
     @Valid
     private Contato contato;
-    //@JsonManagedReference
+    @JsonIgnore
     @OneToMany(orphanRemoval = true, mappedBy = "evento")
     @Size(min = 1, message = "O evento deve ter no mínimo 1 ingresso.")
     private List<Ingresso> ingressos = new ArrayList<>();

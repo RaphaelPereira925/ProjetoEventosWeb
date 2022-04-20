@@ -63,15 +63,13 @@ public class ParticipanteService {
         Participante obj = findByID(p.getId());
         
         //Arquivo
-        if(file != null){
-            if(!file.isEmpty()){
-                salvarArquivo(file, p.getCPF()+".pdf");
-                p.setDocumentos(p.getCPF()+".pdf");
-            }
-            else{
-                p.setDocumentos(null);
-            }
+        p.setDocumentos(obj.getDocumentos());
+        
+        if(!file.isEmpty()){
+            salvarArquivo(file, p.getCPF()+".pdf");
+            p.setDocumentos(p.getCPF()+".pdf");
         }
+        
         try{
             p.setCPF(obj.getCPF());
             return repo.save(p);
