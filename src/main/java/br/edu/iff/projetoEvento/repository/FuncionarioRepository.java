@@ -14,5 +14,6 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
     @Query("SELECT f FROM Funcionario f Where f.CPF = :CPF")
     public List<Usuario> findbyFuncionarioCPF (@Param("CPF") String CPF);
     
-    //public Funcionario findByEmail(String email);//Professor não sei se faz sentido fazer uma verificação por email sendo que email no meu exemplo é atributo de contato e não de pessoa.
+    //public Funcionario findByEmail(String email);
+    
 }

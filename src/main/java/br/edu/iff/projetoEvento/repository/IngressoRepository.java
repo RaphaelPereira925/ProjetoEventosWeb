@@ -17,8 +17,10 @@ public interface IngressoRepository extends JpaRepository<Ingresso, Long>{
     
     public List<Ingresso> findByFuncionarioId(Long funcionarioId, Pageable page);
     
-    //Public List<Ingresso> findByParticianteId(Long participanteId, Pageable page);
+    public List<Ingresso> findByParticipanteId(Long participanteID, Pageable page);
     
     public List<Ingresso> findByParticipanteIdAndFuncionarioId(Long participanteId, Long funcionarioId, Pageable page);
+
+    public Object toList();
 
 }
