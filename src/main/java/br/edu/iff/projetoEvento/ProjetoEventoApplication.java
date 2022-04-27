@@ -57,8 +57,10 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         e.setBairro("Jardim Esperança");
         e.setCidade("Indianópolis");
         e.setCEP("28090-000");
-        
-       pariticipanteRepo.save(e);
+       
+       p.setContato(c);
+       p.setEndereco(e);
+       pariticipanteRepo.save(p);
         
         //Funcionário
         
@@ -81,6 +83,8 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         ef.setCidade("Aracaju");
         ef.setCEP("49066-329");
         
+        f.setContato(cf);
+        f.setEndereco(ef);
         funcionarioRepo.save(f);
         
         //Evento
@@ -104,14 +108,19 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         ee.setCidade("Queimados");
         ee.setCEP("26321-360");
         
+        eE.setContato(ce);
+        eE.setEndereco(ee);
         eventoRepo.save(eE);
         
         //Ingresso
         
         Ingresso i = new Ingresso();
         i.setTipoIngresso(TipoIngressoEnum.PIPOCA);
-        i.setValor(Float.parseFloat("356,00"));
+        i.setValor(Float.parseFloat("356.00"));
        
+        i.setEvento(eE);
+        i.setFuncionario(f);
+        i.setParticipante(p);
         ingressoRepo.save(i);
     }
     

@@ -15,22 +15,22 @@ import org.hibernate.validator.constraints.Length;
 public class Endereco implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    @Column(nullable = false, updatable = true, length = 100)
+    @Column(nullable = false, length = 100)
     @NotBlank(message = "O campo rua é obrigatório.")
     @Length(max = 100, message = "O campo rua deve ter no máximo 100 caracteres.")
     private String rua;
-    @Column(nullable = false, updatable = true)
+    @Column(nullable = false)
     @Digits(integer = 4, fraction = 0, message = "O campo número deve ser inteiro e ter até 4 dígitos.")
     private int numero;
-    @Column(nullable = false, updatable = true, length = 50)
+    @Column(nullable = false, length = 50)
     @NotBlank(message = "O campo bairro é obrigatório.")
     @Length(max = 50, message = "O campo bairro deve ter no máximo 50 caracteres.")
     private String bairro;
-    @Column(nullable = false, updatable = true, length = 100)
+    @Column(nullable = false, length = 100)
     @NotBlank(message = "O campo cidade é obrigatório.")
     @Length(max = 100, message = "O campo cidade deve ter no máximo 100 caracteres.")
     private String cidade;
-    @Column(nullable = false, updatable = true, length = 9)
+    @Column(nullable = false, length = 9)
     @NotBlank(message = "O campo CEP é obrigatório.")
     @Length(min = 9, max = 9, message = "O campo CEP deve ter no extamente 9 caracteres. Ex.: 99999-999")
     @CEPValidation(message = "CEP inválido.")

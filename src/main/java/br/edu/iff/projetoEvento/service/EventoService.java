@@ -70,10 +70,8 @@ public class EventoService {
    }
     private void verificaExclusaoEventosComIngressos(List<Ingresso> ingressos){
         
-        for(Ingresso eE : ingressos){
-            if(!eE.toString().isEmpty()){
-                throw new RuntimeException("Não é possível excluir evento.");
-            }
+        if(ingressos.isEmpty()){
+            throw new RuntimeException("Não é possível excluir evento.");
         }
     }
     

@@ -15,16 +15,16 @@ import org.hibernate.validator.constraints.Length;
 public class Contato implements Serializable{    
     private static final long serialVersionUID = 1L;
     
-    @Column(nullable = false, updatable = true, length = 14)
+    @Column(nullable = false, length = 14)
     @NotBlank(message = "O campo cel é obrigatório.")
     @Length(min = 13, max = 14, message = "O campo cel deve ter 13 ou 14 caracteres. Ex.: (99)99999-9999 ou (99)9999-9999")
     @CelValidation(message = "Celular inválido.")
     private String cel;
-    @Column(nullable = true, updatable = true, length = 13)
+    @Column(nullable = true, length = 13)
     @Length(min = 13, max = 13, message = "O campo tel deve ter exatamente 13 caracteres. Ex.: (99)9999-9999")
     @TelValidation(message = "Telefone inválido.")
     private String tel;
-    @Column(nullable = false, updatable = true, length = 100)
+    @Column(nullable = false, length = 100)
     @NotBlank(message = "O campo Email é obrigatório.")
     @EmailValidation(message = "Email inválido.")
     private String email;

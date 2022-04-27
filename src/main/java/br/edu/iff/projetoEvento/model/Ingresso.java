@@ -23,7 +23,7 @@ public class Ingresso implements Serializable{
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long ID;
-    @Column(nullable = false, updatable = true, length = 20)
+    @Column(nullable = false, length = 20)
     @Enumerated (EnumType.STRING)
     private TipoIngressoEnum tipoIngresso;
     @Column(nullable = false)
@@ -32,7 +32,7 @@ public class Ingresso implements Serializable{
     @JsonIgnore
     @ManyToOne
     @JoinColumn(nullable = false)
-    @NotBlank(message = "Campo evento é obrigatório.")
+    @NotNull(message = "Campo evento é obrigatório.")
     private Evento evento;
     @ManyToOne
     @NotNull(message = "Campo participante é obrigatório.")

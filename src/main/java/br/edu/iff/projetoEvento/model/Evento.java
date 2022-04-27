@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,19 +35,19 @@ public class Evento implements Serializable{
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long ID;
-    @Column(nullable = false, updatable = true, length = 100)
+    @Column(nullable = false, length = 100)
     @NotBlank(message = "O campo nome é obrigatório.")
     @Length(max = 100, message = "O campo nome deve ter no máximo 100 caracteres.")
     private String nome;
-    @Column(nullable = false, updatable = true, length = 100)
+    @Column(nullable = false, length = 100)
     @NotBlank(message = "O campo organizacao é obrigatório.")
     @Length(max = 100, message = "O campo organizacao deve ter no máximo 100 caracteres.")
     private String organizacao;
     @Column(nullable = false)
-    @NotBlank(message = "O campo qtdeIngresso é obrigatório.")
+    @Min(0)@Max(100000)
     @Digits(integer = 100000, fraction = 0, message = "A quantidade de ingressos deve ser um número inteiro.")//Coloquei um número de cem mil no integer devido considerar que alguns eventos podem ter lotação imensas, como 100 mil e por aí vai a depender do evento.
     private int qtdeIngresso;
-    @Column(nullable = false, updatable = true, length = 20)
+    @Column(nullable = false, length = 20)
     @Enumerated (EnumType.STRING)
     @NotNull(message = "Tipo de Status do Evento é um campo obrigatório.")
     private TipoStatusEventoEnum status;
@@ -65,7 +67,7 @@ public class Evento implements Serializable{
     private Contato contato;
     @JsonIgnore
     @OneToMany(orphanRemoval = true, mappedBy = "evento")
-    @Size(min = 1, message = "O evento deve ter no mínimo 1 ingresso.")
+    @Size(min = 0)
     private List<Ingresso> ingressos = new ArrayList<>();
     
     
