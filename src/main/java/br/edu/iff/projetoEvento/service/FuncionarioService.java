@@ -34,11 +34,8 @@ public class FuncionarioService {
         }
         return resultado.get();
     }
-    public Funcionario findByEmail(String email) {
-        return repo.findByEmail(email);
-    }
     public Funcionario save (Funcionario f){
-       //Verifica se o CPF ou o email já estão cadastrados
+       //Verifica se o CPF já está cadastrados
        verificaCPFCadastrado(f.getCPF());
        
        try{ 
@@ -86,7 +83,7 @@ public class FuncionarioService {
        }
    }
     private void verificaCPFCadastrado (String CPF){
-        List<Usuario> resultado = repo.findbyFuncionarioCPF(CPF);
+        List<Usuario> resultado = (List<Usuario>) repo.findbyCPF(CPF);
         if(!resultado.isEmpty()){
             throw new RuntimeException("CPF já cadastrado.");
         }

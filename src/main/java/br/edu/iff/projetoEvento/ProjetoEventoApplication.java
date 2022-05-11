@@ -14,10 +14,12 @@ import br.edu.iff.projetoEvento.repository.IngressoRepository;
 import br.edu.iff.projetoEvento.repository.ParticipanteRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.plaf.multi.MultiFileChooserUI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.MediaType;
 
 @SpringBootApplication
 public class ProjetoEventoApplication implements CommandLineRunner{
@@ -57,9 +59,11 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         e.setBairro("Jardim Esperança");
         e.setCidade("Indianópolis");
         e.setCEP("28090-000");
-       
+        
        p.setContato(c);
        p.setEndereco(e);
+       //Não sei necessariamente se setar documentos seria nesse sentido
+       p.setDocumentos(MediaType.MULTIPART_FORM_DATA_VALUE);
        pariticipanteRepo.save(p);
         
         //Funcionário
@@ -94,7 +98,8 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         eE.setOrganizacao("Eventos S.A.");
         eE.setQtdeIngresso(20000);
         eE.setStatus(TipoStatusEventoEnum.DISPONIVEL);
-        eE.setDataHora(LocalDateTime.parse("2022-08-13 20:00:00", DateTimeFormatter.ISO_DATE));
+        eE.setDataHora(LocalDateTime.parse("2022-08-13T20:00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        //eE.setDataHora(LocalDateTime.parse("2022-08-13 20:00:00", DateTimeFormatter.ISO_DATE));
                 
         Contato ce = new Contato();
         ce.setCel("(21)99502-8558");

@@ -11,6 +11,6 @@ public class CelValidator implements ConstraintValidator<CelValidation, String>{
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if(value==null) return false;
         if(value.contains(" ")) return false;
-        return value.matches("(^[0-9]{2})?(\\s|-)?(9?[0-9]{4})-?([0-9]{4}$)");
+        return value.matches("^[1−9]2[0-9]{5}\\-[0-9]{4}$");
     }
 }
