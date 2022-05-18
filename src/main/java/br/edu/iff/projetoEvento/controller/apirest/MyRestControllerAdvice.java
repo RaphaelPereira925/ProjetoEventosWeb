@@ -1,5 +1,5 @@
 
-package br.edu.iff.projetoEvento.controller;
+package br.edu.iff.projetoEvento.controller.apirest;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

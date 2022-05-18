@@ -7,8 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
@@ -25,7 +28,10 @@ public class  Funcionario extends Usuario{
     @JsonIgnore
     @OneToMany(mappedBy = "funcionario")
     private List<Ingresso> ingressos = new ArrayList<>();
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Size(min = 1, message = "Funcionário deve ter no mínimo uma permissão de acesso.")
+    private List<Permissao> permissoes;
+    
     public String getSetor() {
         return setor;
     }
@@ -50,5 +56,14 @@ public class  Funcionario extends Usuario{
         this.ingressos = ingressos;
     }
 
+    public List<Permissao> getPermissoes() {
+        return permissoes;
+    }
+
+    public void setPermissoes(List<Permissao> permissoes) {
+        this.permissoes = permissoes;
+    }
+    
+    
     
 }

@@ -6,20 +6,23 @@ import br.edu.iff.projetoEvento.model.Evento;
 import br.edu.iff.projetoEvento.model.Funcionario;
 import br.edu.iff.projetoEvento.model.Ingresso;
 import br.edu.iff.projetoEvento.model.Participante;
+import br.edu.iff.projetoEvento.model.Permissao;
 import br.edu.iff.projetoEvento.model.TipoIngressoEnum;
 import br.edu.iff.projetoEvento.model.TipoStatusEventoEnum;
 import br.edu.iff.projetoEvento.repository.EventoRepository;
 import br.edu.iff.projetoEvento.repository.FuncionarioRepository;
 import br.edu.iff.projetoEvento.repository.IngressoRepository;
 import br.edu.iff.projetoEvento.repository.ParticipanteRepository;
+import br.edu.iff.projetoEvento.repository.PermissaoRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.plaf.multi.MultiFileChooserUI;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class ProjetoEventoApplication implements CommandLineRunner{
@@ -33,7 +36,7 @@ public class ProjetoEventoApplication implements CommandLineRunner{
     @Autowired
     private IngressoRepository ingressoRepo;
     @Autowired
-    //private PermissaoRepository permissaoRepo;
+    private PermissaoRepository permissaoRepo;
     
     public static void main(String[] args) {
         SpringApplication.run(ProjetoEventoApplication.class, args);
@@ -41,6 +44,14 @@ public class ProjetoEventoApplication implements CommandLineRunner{
     }
     @Override
     public void run(String... args) throws Exception {
+        //Permissão
+        Permissao P1 = new Permissao();
+        P1.setNome("ADMIN");
+        
+        Permissao P2 = new Permissao();
+        P2.setNome("FUNC");
+        //Não consigo salvar a lista de permissões, não habilitou a opção List.of
+        permissaoRepo.save(List(P1, P2));
         
         //Participante
         Participante p = new Participante();
@@ -49,8 +60,8 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         p.setRG("12.203.952-6");
         
         Contato c = new Contato();
-        c.setCel("(22)99999-9999");
-        c.setTel("(22)9999-9999");
+        c.setCel("(21)99833-2620");
+        c.setTel("(21)2735-0602");
         c.setEmail("larissa@instituicao.com.br");
         
         Endereco e = new Endereco();
@@ -65,7 +76,7 @@ public class ProjetoEventoApplication implements CommandLineRunner{
        //Não sei necessariamente se setar documentos seria nesse sentido
        p.setDocumentos(MediaType.MULTIPART_FORM_DATA_VALUE);
        pariticipanteRepo.save(p);
-        
+          
         //Funcionário
         
         Funcionario f = new Funcionario();
@@ -73,11 +84,12 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         f.setCPF("462.340.455-29");
         f.setRG("49.454.542-2");
         f.setSetor("Cadastramento");
-        f.setSenha("12345678");
+        f.setSenha(new BCryptPasswordEncoder().encode("12345678"));
+        f.setPermissoes(List(P1, P2));
         
         Contato cf = new Contato();
-        cf.setCel("(79)99323-9489");
-        cf.setTel("(79)3853-4456");
+        cf.setCel("(22)99323-9489");
+        cf.setTel("(22)3853-4456");
         cf.setEmail("kdamaceno@instituicao.com.br");
 
         Endereco ef = new Endereco();
@@ -90,7 +102,7 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         f.setContato(cf);
         f.setEndereco(ef);
         funcionarioRepo.save(f);
-        
+       
         //Evento
         
         Evento eE = new Evento();

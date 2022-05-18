@@ -11,6 +11,7 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,10 +36,11 @@ public class FuncionarioService {
         return resultado.get();
     }
     public Funcionario save (Funcionario f){
-       //Verifica se o CPF já está cadastrados
+       //Verifica se o CPF já está cadastrado
        verificaCPFCadastrado(f.getCPF());
        
        try{ 
+        f.setSenha(new BCryptPasswordEncoder().encode(f.getSenha()));
         return repo.save(f);
        }catch(Exception Ex){
            Throwable t = Ex;
@@ -97,7 +99,7 @@ public class FuncionarioService {
             if(!novaSenha.equals(confirmarNovaSenha)){
                 throw new RuntimeException("A senha nova não é igual a senha atual.");
             }
-            obj.setSenha(novaSenha);
+            obj.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
         }
         
     }

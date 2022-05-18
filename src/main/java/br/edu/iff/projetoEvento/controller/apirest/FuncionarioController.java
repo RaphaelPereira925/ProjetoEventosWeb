@@ -1,5 +1,5 @@
 
-package br.edu.iff.projetoEvento.controller;
+package br.edu.iff.projetoEvento.controller.apirest;
 
 import br.edu.iff.projetoEvento.model.Funcionario;
 import br.edu.iff.projetoEvento.service.FuncionarioService;

@@ -1,8 +1,9 @@
 
-package br.edu.iff.projetoEvento.controller;
+package br.edu.iff.projetoEvento.controller.apirest;
 
-import br.edu.iff.projetoEvento.model.Ingresso;
-import br.edu.iff.projetoEvento.service.IngressoService;
+import br.edu.iff.projetoEvento.model.Evento;
+import br.edu.iff.projetoEvento.service.EventoService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,36 +18,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/apirest/ingressos")
-public class IngressoController {
+@RequestMapping(path = "/apirest/eventos")
+public class EventoController {
     @Autowired
-    private IngressoService service;
+    private EventoService service;
     
     @GetMapping
     public ResponseEntity getAll(
-            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
-            @RequestParam(name = "size", defaultValue = "10", required = false) int size,
-            @RequestParam(name = "clienteID", defaultValue = "0", required = false) Long clienteID,
-            @RequestParam(name = "funcionarioID", defaultValue = "0", required = false) Long funcionarioID,
-            @RequestParam(name = "eventoID", defaultValue = "0", required = false) Long eventoID){
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page, 
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size){
         
-        return ResponseEntity.ok(service.findAll(page, size, clienteID, funcionarioID, eventoID));        
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAll(page, size));
     }
+    
     @GetMapping(path = "/{id}")
     public ResponseEntity getOne(@PathVariable("id") Long ID){
         return ResponseEntity.ok(service.findByID(ID));
     }
+    
     @PostMapping
-    public ResponseEntity save(@RequestBody Ingresso ingresso){
-        ingresso.setID(null);
-        service.save(ingresso);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ingresso);
+    public ResponseEntity save(@Valid @RequestBody Evento evento){
+        evento.setID(null);
+        service.save(evento);
+        return ResponseEntity.status(HttpStatus.CREATED).body(evento);
     }
     
     @PutMapping(path = "/{id}")
-    public ResponseEntity update(@PathVariable("id") Long ID, @RequestBody Ingresso ingresso){
-        ingresso.setID(ID);
-        service.update(ingresso);
+    public ResponseEntity update(@PathVariable("id") Long ID, @Valid @RequestBody Evento evento){
+        evento.setID(ID);
+        service.update(evento);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
@@ -55,4 +55,6 @@ public class IngressoController {
         service.delete(ID);
         return ResponseEntity.ok().build();
     }
+    
+    
 }

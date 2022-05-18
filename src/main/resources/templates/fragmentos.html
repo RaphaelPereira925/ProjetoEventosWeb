@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="imports-css(title)">
+        <title th:text="$(title)">Sistema de Eventos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{~/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" rel="stylesheet"/>
+    </head>
+    <body>
+        <div th:fragment="barramenu(pagina)">
+            <div class="container">
+                <nav class="navbar navbar-dark bg-primary">
+                    <a class="navbar-brand" href="/">
+                        <img th:src="(@~/imagens/logo.png)" width="1000" height="271" class="img-thumbnail">
+                        Sistema de Eventos
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="textoNavBar">
+                        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                            <li class="nav-item" th:classappend="$(pagina == 'eventos' ? 'active' : '')">
+                                <a class="nav-link active" aria-current="page" th:href="@(~/eventos)">Eventos</a>
+                            </li>
+                            <li class="nav-item" th:classappend="$(pagina == 'participante' ? 'active' : '')">
+                                <a class="nav-link active" aria-current="page" th:href="@(~/participantes)">Participantes</a>
+                            </li>
+                            <li class="nav-item" th:classappend="$(pagina == 'funcionario' ? 'active' : '')">
+                                <a class="nav-link active" aria-current="page" th:href="@(~/funcionarios)">Funcionários</a>
+                            </li>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div th:fragment="imports-js">
+            <script th:src="@{~/webjars/jquery/3.5.1/jquery.min.js}"></script>
+            <script th:src="@{~/webjars/bootstrap/4.5.0/js/bootstrap.bundle.min.js}"></script>
+        </div>
+    </body>
+</html>
