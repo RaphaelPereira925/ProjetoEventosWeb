@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~(fragmentos :: imports-css(title='Sistema de Eventos'))">
+    <head th:replace="~{fragmentos :: imports-css(title='Sistema de Eventos')}">
         <title>...</title>
     </head>
     <body>
         <div th:replace="~{fragmentos :: barramenu(pagina='')}"/>
         <div class="container" align="center">
-            <img th:src="(imagens/logo.png)" class="img-fluid" style="opacity: 10%">
+            <img th:src="@{~/imagens/logo.png}" style="margin-top: 3rem; opacity: 80%"/>
         </div>
         
         
