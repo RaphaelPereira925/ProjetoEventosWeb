@@ -16,7 +16,7 @@ import br.edu.iff.projetoEvento.repository.ParticipanteRepository;
 import br.edu.iff.projetoEvento.repository.PermissaoRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -50,8 +50,12 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         
         Permissao P2 = new Permissao();
         P2.setNome("FUNC");
-        //Não consigo salvar a lista de permissões, não habilitou a opção List.of
-        permissaoRepo.save(List(P1, P2));
+        
+        ArrayList<Permissao> a = new ArrayList();
+        a.add(P2);
+        a.add(P1);
+        
+        permissaoRepo.saveAll(a);
         
         //Participante
         Participante p = new Participante();
@@ -85,7 +89,7 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         f.setRG("49.454.542-2");
         f.setSetor("Cadastramento");
         f.setSenha(new BCryptPasswordEncoder().encode("12345678"));
-        f.setPermissoes(List(P1, P2));
+        f.setPermissoes(a);
         
         Contato cf = new Contato();
         cf.setCel("(22)99323-9489");
@@ -111,7 +115,6 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         eE.setQtdeIngresso(20000);
         eE.setStatus(TipoStatusEventoEnum.DISPONIVEL);
         eE.setDataHora(LocalDateTime.parse("2022-08-13T20:00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME));
-        //eE.setDataHora(LocalDateTime.parse("2022-08-13 20:00:00", DateTimeFormatter.ISO_DATE));
                 
         Contato ce = new Contato();
         ce.setCel("(21)99502-8558");
