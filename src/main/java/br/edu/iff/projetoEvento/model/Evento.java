@@ -54,7 +54,7 @@ public class Evento implements Serializable{
     @Column(nullable = false, updatable = false, length = 20)
     @NotNull(message = "Data e horário do evento são campos obrigatórios.")
     @FutureOrPresent(message = "Data e horário devem ser no mínimo hoje ou em datas futuras.")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime dataHora;
     @Embedded

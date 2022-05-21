@@ -31,6 +31,12 @@
                                 <span th:text="${evento.endereco.bairro+', '+evento.endereco.cidade }"></span><br>
                                 <span th:text="${'CEP: '+evento.endereco.CEP}"></span>
                             </address>
+                            
+                            <span>Contatos:</span><br>
+                            <span th:text="${evento.contato.cel}"></span><br>
+                            <span th:text="${evento.contato.tel}"></span><br>
+                            <span th:text="${evento.contato.email}"></span><br><br>
+                            
                             <span>
                                 Organização:
                                 <span th:text="${evento.organizacao }"></span><br>

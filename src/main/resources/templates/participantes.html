@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+    <head th:replace="~{fragmentos :: imports-css(title='Participantes')}">
+        <title>...</title>
+    </head>
+    <body>
+        <div th:replace="~{fragmentos :: barramenu(pagina='participantes')}"/>
+        <div class="container">
+            <div class="card-header" style="margin-top: 3rem;">
+                <h5>
+                    <svg xmlns="http://www.w3.org/2000/svg" style="padding: 0 10px;" width="60" height="60" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                    </svg>
+                    Participantes Cadastrados
+                    <a class="btn btn-outline-info float-right" th:href="@{~/participantes/participante}" role="buttom">Novo Participante</a>
+                </h5>
+            </div>
+            <div class="card" style="margin-top: 3rem;">
+                
+                <div class="card border-info mb-3" style="max-width: 20rem; margin-top: 1rem; margin-left: 1rem;" th:each= "participante : ${participantes}">
+                    <div class="card-header" >
+                        <H4 th:text="${participante.nome}" style="text-align: center"></H4>
+                    </div>
+                    <div class="card-body text-dark">
+                        <div class="card-text">
+                            <span>Endereço:</span><br>
+                            <address>
+                                <span th:text="${participante.endereco.rua+', n°: '+participante.endereco.numero }"></span><br>
+                                <span th:text="${participante.endereco.bairro+', '+participante.endereco.cidade }"></span><br>
+                                <span th:text="${'CEP: '+participante.endereco.CEP}"></span>
+                            </address>
+                            <div class="card-text" th:if="${participante.documentos}">
+                                <span>Documentação:</span><br>
+                                <a th:href="@{'~/files/pdf/'+${participante.documentos}}" target="_blank" class="btn btn-outline-info float-right" role="buttom">Download</a><br><br>
+                            </div>
+                            <div class="card-text">
+                                <span>Contatos:</span><br>
+                                <span th:text="${participante.contato.cel}"></span><br>
+                                <span th:text="${participante.contato.tel}"></span><br>
+                                <span th:text="${participante.contato.email}"></span><br><br>
+                            </div>
+                        </div>
+                        <a class="btn btn-outline-info float-right" th:href="@{'~/participantes/participante/'+${participante.Id}}" role="buttom">Editar</a>
+                        <a class="btn btn-outline-info float-right" th:href="@{'~/participantes/'+${participante.Id}+'/deletar'}" role="buttom" onclick="return confirm('Deseja realmente excluir esse Participante?')">Deletar</a>
+                    </div>
+                </div>
+                <!--<div class="card-body text-dark">
+                        <div class="card-text">
+                            <span>Endereço:</span>
+                            <address>
+                                <span th:text="${participante.endereco.rua+', n°: '+participante.endereco.numero }"></span><br>
+                                <span th:text="${participante.endereco.bairro+', '+participante.endereco.cidade }"></span><br>
+                                <span th:text="${'CEP: '+participante.endereco.CEP}"></span>
+                            </address>
+                             
+                        </div><br>-->
+                        <!--<a class="btn btn-outline-info float-right" th:href="@{~/ingressos (evento = ${evento.ID})}" role="buttom">Ingressos</a>
+                        <a class="btn btn-outline-info float-right" th:href="@{'~/eventos/evento/'+${evento.ID}}" role="buttom">Editar</a>
+                        <a class="btn btn-outline-info float-right" th:href="@{'~/eventos/'+${evento.ID}+'/deletar'}" role="buttom" onclick="return confirm('Deseja realmente excluir esse Evento?')">Deletar</a>-->
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        
+        <div th:replace="~{fragmentos :: imports-js}"/>
+    </body>
+</html>
