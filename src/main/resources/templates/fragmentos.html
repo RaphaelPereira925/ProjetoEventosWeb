@@ -81,6 +81,23 @@
         </nav>
       </div>
     </div>
+      <div th:fragment="mensagens">
+          <div th:if="${not #strings.isEmpty(msgErros)}" class="alert alert-danger d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <a th:each="msg : ${msgErros}" th:text="${msg.getDefaultMessage()}"></a>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+          </div>
+          <div th:if="${not #strings.isEmpty(msgSucesso)}" class="alert alert-primary d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+            <p th:each="m : ${msgSucesso}" th:text="${m}"></p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          
+      </div>
     <div th:fragment="imports-js">
       <script th:src="@{~/webjars/jquery/3.5.1/jquery.min.js}"></script>
       <script

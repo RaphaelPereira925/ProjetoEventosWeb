@@ -1,19 +1,53 @@
 <!DOCTYPE html>
 
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~(fragmentos :: imports-css(title='Eventos'))">
+    <head th:replace="~{fragmentos :: imports-css(title='Eventos')}">
         <title>...</title>
     </head>
     <body>
         <div th:replace="~{fragmentos :: barramenu(pagina='eventos')}"/>
+        
         <div class="container">
-            <div class="card-header">
-                <h4>
+            <div class="card-header" style="margin-top: 3rem;">
+                <h5>
+                    <svg xmlns="http://www.w3.org/2000/svg" style="padding: 0 10px;" width="60" height="60" fill="currentColor" class="bi bi-calendar2-week-fill" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zm9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5zM8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM3 10.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+                    </svg>
                     Eventos Cadastrados
-                    <a class="btn btn-primary float-right" th:href="@(~/eventos/evento)" role="buttom">Novo Evento</a>
-                </h4>
+                    <a class="btn btn-outline-info float-right" th:href="@{~/eventos/evento}" role="buttom">Novo Evento</a>
+                </h5>
             </div>
-        </div> 
+            <div class="card" style="margin-top: 3rem;">
+                
+                <div class="card border-info mb-3" style="max-width: 20rem; margin-top: 1rem; margin-left: 1rem;" th:each= "evento : ${eventos}">
+                    <div class="card-header" >
+                        <H4 th:text="${evento.nome}" style="text-align: center"></H4>
+                    </div>
+                    <div class="card-body text-dark">
+                        <div class="card-text">
+                            <span>Localização:</span>
+                            <address>
+                                <span th:text="${evento.endereco.rua+', n°: '+evento.endereco.numero }"></span><br>
+                                <span th:text="${evento.endereco.bairro+', '+evento.endereco.cidade }"></span><br>
+                                <span th:text="${'CEP: '+evento.endereco.CEP}"></span>
+                            </address>
+                            <span>
+                                Organização:
+                                <span th:text="${evento.organizacao }"></span><br>
+                            </span>
+                            <span>
+                                Data:
+                                <span th:text="${evento.dataHora}+' horas.'"></span><br>
+                            </span>   
+                        </div><br>
+                        <a class="btn btn-outline-info float-right" th:href="@{~/ingressos (evento = ${evento.ID})}" role="buttom">Ingressos</a>
+                        <a class="btn btn-outline-info float-right" th:href="@{'~/eventos/evento/'+${evento.ID}}" role="buttom">Editar</a>
+                        <a class="btn btn-outline-info float-right" th:href="@{'~/eventos/'+${evento.ID}+'/deletar'}" role="buttom" onclick="return confirm('Deseja realmente excluir esse Evento?')">Deletar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div th:replace="~{fragmentos :: imports-js}"/>
+      
     </body>
 </html>

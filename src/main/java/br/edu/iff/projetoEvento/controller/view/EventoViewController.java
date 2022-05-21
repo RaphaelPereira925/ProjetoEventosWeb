@@ -28,59 +28,65 @@ public class EventoViewController {
     public String getAll(Model model){
        
         model.addAttribute("eventos", service.findAll());
-        
         return "/eventos";
     }
     @GetMapping(path = "/evento")
     public String cadastro(Model model){
         model.addAttribute("evento", new Evento());
-        model.addAttribute("tipoStatusEvento", TipoStatusEventoEnum.values());
+        model.addAttribute("tipoStatus", TipoStatusEventoEnum.values());
  
-        return "/evento";
+        return "formularioEvento";
     }
     @PostMapping(path = "/evento")
     public String save(@Valid @ModelAttribute Evento evento, BindingResult result, Model model) {
         //valores de retorno padrão
-        model.addAttribute("tiposEvento", TipoStatusEventoEnum.values());
+        
+        //Estou pensando em criar um método que converte a data de String para LocalDateTime
+        
+        //converterLocalDateTime(evento.getDataHora().format(DateTimeFormatter.ISO_DATE_TIME));
+        
+        model.addAttribute("status", TipoStatusEventoEnum.values());
         if (result.hasErrors()) {
             model.addAttribute("msgErros", result.getAllErrors());
-            return "formEvento";
+            return "formularioEvento";
         }
         evento.setID(null);
         try {
             service.save(evento);
             model.addAttribute("msgSucesso", "Evento cadastrado com sucesso.");
             model.addAttribute("evento", new Evento());
-            return "formEvento";
+            return "formularioEvento";
         } catch (Exception e) {
             model.addAttribute("msgErros", new ObjectError("Evento", e.getMessage()));
-            return "formEvento";
+            
+            return "formularioEvento";
         }
+        
     }
-    
     @GetMapping(path = "/evento/{ID}")
     public String alterar (@PathVariable("ID") Long ID,Model model) {
         model.addAttribute("evento", service.findByID(ID));
-        model.addAttribute("tiposEvento", TipoStatusEventoEnum.values());
-        return "formEvento";
+        model.addAttribute("tipoStatus", TipoStatusEventoEnum.values());
+        return "formularioEvento";
     }
+    
     @PostMapping(path = "/evento/{ID}")
     public String update(@Valid @ModelAttribute Evento evento, BindingResult result, @PathVariable("ID") Long ID, Model model) {
         //valores de retorno padrão
         model.addAttribute("tipoEvento", TipoStatusEventoEnum.values());
         if (result.hasErrors()) {
             model.addAttribute("msgErros", result.getAllErrors());
-            return "formEvento";
+            return "formularioEvento";
         }
         evento.setID(ID);
         try {
             service.update(evento);
             model.addAttribute("msgSucesso", "Evento atualizado com sucesso.");
             model.addAttribute("evento", evento);
-            return "formEvento";
+            return "formularioEvento";
         } catch (Exception e) {
             model.addAttribute("msgErros", new ObjectError("Evento", e.getMessage()));
-            return "formEvento";
+            return "formularioEvento";
         }
     }
     @GetMapping(path = "/{ID}/deletar")
@@ -88,4 +94,12 @@ public class EventoViewController {
         service.delete(ID);
         return "redirect:/eventos";
     }
+    
+    /*private void converterLocalDateTime (LocalDateTime date){
+        
+        date = LocalDateTime.now();
+        
+        
+    }*/
+
 }

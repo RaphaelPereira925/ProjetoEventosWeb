@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html>
+    <head th:replace="~{fragmentos :: imports-css(title='Cadastrar Eventos')}">
+        <title>...</title>
+    </head>
+    <body>
+        <div th:replace="~{fragmentos :: barramenu(pagina='eventos')}"/>
+        
+        <div class="container" style="margin-top: 3rem">
+            <div class="card-header" style="margin-top: 3rem;">
+                <h5>
+                    <svg xmlns="http://www.w3.org/2000/svg" style="padding: 0 10px;" width="60" height="60" fill="currentColor" class="bi bi-calendar2-week-fill" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zm9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5zM8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM3 10.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+                    </svg>
+                    Cadastro de Eventos
+                    <a class="btn btn-outline-info float-right" th:href="@{~/eventos}" role="buttom">Voltar</a>
+                </h5>
+            </div>
+        </div>
+        <div class="container">
+            <!--Mensagens de Erro virão aqui-->
+            <div th:replace="fragmentos :: mensagens" style="margin-top: 1rem; margin-left: 1rem; margin-bottom: 1rem; margin-right: 1rem;"></div>
+            <div class="card">
+                <div class="card border-info mb-3" style="margin-top: 1rem; margin-left: 1rem; margin-bottom: 1rem; margin-right: 1rem; background-color: #E8F9FD;">
+                    <form class="card-body" th:object="${evento}" th:action="@{~/eventos/evento/{ID} (ID=${evento.ID})}" method="post">
+                        <div>
+                            <input type="hidden" th:field="*{ID}"/>
+                            <!--Aqui inicia os dados da Classe do Evento-->
+                            <div class="row"> 
+                                <div class="form-group col-md-7">
+                                    <label for="nome">Nome</label>
+                                    <input th:field="*{nome}" type="text" class="form-control" placeholder="Nome do Evento" required="required" maxlength="100"/>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="organizacao">Organização</label>
+                                    <input th:field="*{organizacao}" type="text" class="form-control" placeholder="Nome da Organizadora do Evento" required="required" maxlength="100"/>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    <label for="qtdeIngresso">Qtde Ingressos</label>
+                                    <input th:field="*{qtdeIngresso}" type="number" class="form-control" required="required" maxlength="6"/>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="status">Status</label>
+                                    <select class="form-select">
+                                        <option selected>Selecione</option>
+                                        <option th:field="*{status}" value="DISPONIVEL" type="TipoStatusEventoEnum" class="form-control" required="required">Disponível</option>
+                                        <option th:field="*{status}" value="ESGOTADO" type="TipoStatusEventoEnum" class="form-control" required="required">Esgotado</option>
+                                        <option th:field="*{status}" value="CANCELADO" type="TipoStatusEventoEnum" class="form-control" required="required">Cancelado</option>
+                                        <!--<input type="hidden" th:field="*@{~/eventos/evento/{status}(status={TipoStatusEventoEnum})}"/>
+                                        
+                                            Não estou sabendo como pegar o valor da option e associar ao tipo de status.
+                                        -->
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="dataHora">Data e Horário</label>
+                                    <input th:field="*{dataHora}" type="datetime-local" class="form-control" required="required"/>
+                                </div>
+                                
+                            </div>   
+                           
+                            <!--Aqui inicia os dados da Classe Contato-->
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="contato.cel">Celular</label>              <!--^\\([1-9]{2}\\)[0-9]{5}\\-[0-9]{4}$-->
+                                    <input th:field="*{contato.cel}" type="text" pattern="^\([1-9]{2}\)[0-9]{5}\-[0-9]{4}$" class="form-control" placeholder="(99)99999-9999" required="required" maxlength="14"/>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="contato.tel">Telefone</label>
+                                    <input th:field="*{contato.tel}" type="text" pattern="^\([1-9]{2}\)[0-9]{4}\-[0-9]{4}$" class="form-control" placeholder="(99)9999-9999" maxlength="13"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="contato.email">Email</label>            <!--[\\w\\S]+[@]+[\\w\\S]+[.]+[\\w\\S]+-->
+                                    <input th:field="*{contato.email}" type="text" pattern="[\w\S]+[@]+[\w\S]+[.]+[\w\S]+" class="form-control" placeholder="exemplo@email.com" required="required" maxlength="100"/>
+                                </div>
+                            </div>
+                            
+                            <!--Aqui inicia os dados da Classe Endereço-->
+                            <div class="row">
+                                <div class="form-group col-md-8">
+                                    <label for="endereco.rua">Rua</label>
+                                    <input th:field="*{endereco.rua}" type="text" class="form-control" placeholder="Rua" required="required" maxlength="100"/>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="endereco.numero">Número</label>
+                                    <input th:field="*{endereco.numero}" type="number" min="0" max="9999" class="form-control" placeholder="Número" required="required"/>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="endereco.CEP">CEP:</label>
+                                    <input th:field="*{endereco.CEP}" type="text" maxlength="9" pattern="[0-9]{5}-[0-9]{3}" class="form-control" placeholder="99999-999" required="required"/>
+                                </div>        
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="endereco.bairro">Bairro</label>
+                                    <input th:field="*{endereco.bairro}" type="text" class="form-control" placeholder="Bairro" required="required" maxlength="50"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="endereco.cidade">Cidade</label>
+                                    <input th:field="*{endereco.cidade}" type="text" class="form-control" placeholder="Cidade" required="required" maxlength="100"/>
+                                </div>       
+                            </div>  
+                        </div>
+                        <div class="card-footer border-info mb-3" style="margin-top: 3rem;"><br>
+                            <input type="submit" class="btn btn btn-outline-dark" value="salvar" style="alignment-adjust: "/>   
+                        </div>
+                    </form>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        <div th:replace="~{fragmentos :: imports-js}"/>
+    </body>
+</html>
