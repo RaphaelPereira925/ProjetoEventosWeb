@@ -1,5 +1,6 @@
 package br.edu.iff.projetoEvento;
 
+import br.edu.iff.projetoEvento.controller.view.ArquivosController;
 import br.edu.iff.projetoEvento.model.Contato;
 import br.edu.iff.projetoEvento.model.Endereco;
 import br.edu.iff.projetoEvento.model.Evento;
@@ -14,6 +15,7 @@ import br.edu.iff.projetoEvento.repository.FuncionarioRepository;
 import br.edu.iff.projetoEvento.repository.IngressoRepository;
 import br.edu.iff.projetoEvento.repository.ParticipanteRepository;
 import br.edu.iff.projetoEvento.repository.PermissaoRepository;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
