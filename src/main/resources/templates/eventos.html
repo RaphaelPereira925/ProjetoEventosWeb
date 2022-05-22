@@ -25,6 +25,11 @@
                     </div>
                     <div class="card-body text-dark">
                         <div class="card-text">
+                            
+                            <span th:text="${'Status: '+evento.status}"></span><br><br>
+                            
+                            <span th:text="${'Quantidade de Ingressos: '+evento.qtdeIngresso}"></span><br><br>
+                                    
                             <span>Localização:</span>
                             <address>
                                 <span th:text="${evento.endereco.rua+', n°: '+evento.endereco.numero }"></span><br>
@@ -37,14 +42,10 @@
                             <span th:text="${evento.contato.tel}"></span><br>
                             <span th:text="${evento.contato.email}"></span><br><br>
                             
-                            <span>
-                                Organização:
-                                <span th:text="${evento.organizacao }"></span><br>
-                            </span>
-                            <span>
-                                Data:
-                                <span th:text="${evento.dataHora}+' horas.'"></span><br>
-                            </span>   
+                            <span th:text="${'Organização: '+evento.organizacao }"></span><br>
+                            
+                            <span th:text="${'Data: '+evento.dataHora}+' horas.'"></span><br>
+                             
                         </div><br>
                         <a class="btn btn-outline-info float-right" th:href="@{~/ingressos (evento = ${evento.ID})}" role="buttom">Ingressos</a>
                         <a class="btn btn-outline-info float-right" th:href="@{'~/eventos/evento/'+${evento.ID}}" role="buttom">Editar</a>

@@ -39,13 +39,8 @@ public class EventoViewController {
     }
     @PostMapping(path = "/evento")
     public String save(@Valid @ModelAttribute Evento evento, BindingResult result, Model model) {
-        //valores de retorno padrão
         
-        //Estou pensando em criar um método que converte a data de String para LocalDateTime
-        
-        //converterLocalDateTime(evento.getDataHora().format(DateTimeFormatter.ISO_DATE_TIME));
-        
-        model.addAttribute("status", TipoStatusEventoEnum.values());
+        model.addAttribute("tipoStatus", TipoStatusEventoEnum.values());
         if (result.hasErrors()) {
             model.addAttribute("msgErros", result.getAllErrors());
             return "formularioEvento";
@@ -73,7 +68,7 @@ public class EventoViewController {
     @PostMapping(path = "/evento/{ID}")
     public String update(@Valid @ModelAttribute Evento evento, BindingResult result, @PathVariable("ID") Long ID, Model model) {
         //valores de retorno padrão
-        model.addAttribute("tipoEvento", TipoStatusEventoEnum.values());
+        model.addAttribute("tipoStatus", TipoStatusEventoEnum.values());
         if (result.hasErrors()) {
             model.addAttribute("msgErros", result.getAllErrors());
             return "formularioEvento";
@@ -95,11 +90,4 @@ public class EventoViewController {
         return "redirect:/eventos";
     }
     
-    /*private void converterLocalDateTime (LocalDateTime date){
-        
-        date = LocalDateTime.now();
-        
-        
-    }*/
-
 }
