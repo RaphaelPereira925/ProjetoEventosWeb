@@ -20,6 +20,11 @@ public class IngressoService {
         Pageable p = PageRequest.of(page, size);
         return repo.findAll(p).toList();
     }
+    public List<Ingresso> findAll(Long IDevento){
+        
+        return repo.findByIngressosByEvento(IDevento);
+    }
+    
     public List<Ingresso> findAll (int page, int size, Long participanteID, Long funcionarioID, Long eventoID){
         Pageable p = PageRequest.of(page, size);
         if(participanteID != 0 && funcionarioID != 0){

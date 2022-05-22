@@ -3,6 +3,7 @@ package br.edu.iff.projetoEvento.service;
 
 import br.edu.iff.projetoEvento.exception.NotFoundException;
 import br.edu.iff.projetoEvento.model.Funcionario;
+import br.edu.iff.projetoEvento.model.Permissao;
 import br.edu.iff.projetoEvento.model.Usuario;
 import br.edu.iff.projetoEvento.repository.FuncionarioRepository;
 import java.util.List;
@@ -56,6 +57,8 @@ public class FuncionarioService {
     public Funcionario update (Funcionario f, String senhaAtual, String novaSenha, String ConfirmarNovaSenha){
         //Verifica se funcionário já existe
         Funcionario obj = findByID(f.getId());
+        //Verifica permissões nulas
+        removePermissoesNulas(f);
         //Verifica alteração da senha
         alterarSenha(obj, senhaAtual, novaSenha, ConfirmarNovaSenha);
         try {
@@ -106,6 +109,14 @@ public class FuncionarioService {
     private void verificaExclusaoFuncinarioComIngressos(Funcionario f) {
         if (!f.getIngressos().isEmpty()) {
             throw new RuntimeException("Funcionário possui ingresso. Não pode ser excluído.");
+        }
+    }
+    public void removePermissoesNulas(Funcionario f){
+        f.getPermissoes().removeIf( (Permissao p) -> {
+            return p.getID()==null;
+        });
+        if(f.getPermissoes().isEmpty()){
+            throw new RuntimeException("Funcionario deve conter no mínimo 1 permissão.");
         }
     }
 }
