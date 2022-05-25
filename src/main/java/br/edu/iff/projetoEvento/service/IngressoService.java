@@ -29,6 +29,7 @@ public class IngressoService {
         Pageable p = PageRequest.of(page, size);
         if(participanteID != 0 && funcionarioID != 0){
             return repo.findByParticipanteIdAndFuncionarioId(participanteID, funcionarioID, p);
+            
         }
         else{
             if(participanteID != 0){

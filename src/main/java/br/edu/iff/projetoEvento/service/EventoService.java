@@ -48,7 +48,6 @@ public class EventoService {
         
         List<Ingresso> ingressoAtuais = obj.getIngressos();
         ingressoAtuais.removeAll(e.getIngressos());
-        verificaExclusaoEventosComIngressos(ingressoAtuais);
         
         try {
             e.setID(obj.getID());
@@ -70,7 +69,7 @@ public class EventoService {
    }
     private void verificaExclusaoEventosComIngressos(List<Ingresso> ingressos){
         
-        if(ingressos.isEmpty()){
+        if(!ingressos.isEmpty()){
             throw new RuntimeException("Não é possível excluir evento.");
         }
     }

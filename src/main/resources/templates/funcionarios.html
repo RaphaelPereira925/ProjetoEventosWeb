@@ -41,7 +41,7 @@
                                 <span th:text="${funcionario.contato.email}"></span><br><br>
                             </div>
                         </div>
-                        <!--<a class="btn btn-outline-info float-right" th:href="@{'~/funcionarios/funcionario/'+${funcionario.Id}}" role="buttom">Editar</a>-->
+                        
                         <a class="btn btn-outline-info float-right" th:href="@{'~/funcionarios/funcionario/'+${funcionario.Id}}" role="buttom">Editar</a>
                         <a class="btn btn-outline-info float-right" th:href="@{'~/funcionarios/'+${funcionario.Id}+'/deletar'}" role="buttom" onclick="return confirm('Deseja realmente excluir esse Funcionrio?')">Deletar</a>
                     </div>

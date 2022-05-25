@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html>
+    <head th:replace="~{fragmentos :: imports-css(title='Erro')}">
+        <title>...</title>
+    </head>
+    <body>
+        <div th:replace="~{fragmentos :: barramenu(pagina='')}"/>
+        <div class="container" align="center" style="margin-top: 30px">
+            <H3>Ops! Parece que ocorreu uma falha em nossos servidores, tente novamente mais tarde.</H3>
+            <a class="btn btn-outline-info float-right" th:href="@{~/}" role="buttom">Voltar</a>
+        </div>
+        
+        
+        <div th:replace="~{fragmentos :: imports-js}"/>
+    </body>
+</html>

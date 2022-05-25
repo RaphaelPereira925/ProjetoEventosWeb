@@ -31,33 +31,33 @@ public class FuncionarioController {
         return ResponseEntity.ok(service.findAll(page, size));
     }
     
-    @GetMapping(path = "/{id}")
-    public ResponseEntity getOne(@PathVariable("id") Long ID){
+    @GetMapping(path = "/{ID}")
+    public ResponseEntity getOne(@PathVariable("ID") Long ID){
         return ResponseEntity.ok(service.findByID(ID));
     }
     
     @PostMapping
     public ResponseEntity save(@Valid @RequestBody Funcionario funcionario){
-        funcionario.setId(0);
+        funcionario.setID(null);
         service.save(funcionario);
         return ResponseEntity.status(HttpStatus.CREATED).body(funcionario);
     }
     
-    @PutMapping(path = "/{id}")
-    public ResponseEntity update(@PathVariable("id") Long ID, @RequestBody Funcionario funcionario){
-        funcionario.setId(ID);
+    @PutMapping(path = "/{ID}")
+    public ResponseEntity update(@PathVariable("ID") Long ID, @RequestBody Funcionario funcionario){
+        funcionario.setID(ID);
         service.update(funcionario, "", "", "");
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long ID){
+    @DeleteMapping(path = "/{ID}")
+    public ResponseEntity delete(@PathVariable("ID") Long ID){
         service.delete(ID);
         return ResponseEntity.ok().build(); 
     }
     
-    @PutMapping(path = "/{id}/alterarSenha")
-    public ResponseEntity alterarSenha(@PathVariable("id") Long ID,
+    @PutMapping(path = "/{ID}/alterarSenha")
+    public ResponseEntity alterarSenha(@PathVariable("ID") Long ID,
             @RequestParam(name = "senhaAtual", defaultValue = "", required = true) String senhaAtual,
             @RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha,
             @RequestParam(name = "confirmarNovaSenha", defaultValue = "", required = true) String confirmarNovaSenha){

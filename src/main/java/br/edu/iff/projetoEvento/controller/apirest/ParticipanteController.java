@@ -32,29 +32,29 @@ public class ParticipanteController {
 
         return ResponseEntity.ok(service.findAll(page, size));
     }
-    @GetMapping(path = "/{id}")
-    public ResponseEntity getOne(@PathVariable("id") Long ID) {
+    @GetMapping(path = "/{ID}")
+    public ResponseEntity getOne(@PathVariable("ID") Long ID) {
         return ResponseEntity.ok(service.findByID(ID));
     }
     @PostMapping
     public ResponseEntity save(@Valid @RequestBody Participante participante){
-        participante.setId(0);
+        participante.setID(null);
         service.save(null, participante);
         return ResponseEntity.status(HttpStatus.CREATED).body(participante);
     }
-    @PutMapping(path = "/{id}")
-    public ResponseEntity update(@PathVariable("id") Long ID, @Valid @RequestBody Participante participante){
-        participante.setId(0);
+    @PutMapping(path = "/{ID}")
+    public ResponseEntity update(@PathVariable("ID") Long ID, @Valid @RequestBody Participante participante){
+        participante.setID(ID);
         service.update(participante, null);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long ID){
+    @DeleteMapping(path = "/{ID}")
+    public ResponseEntity delete(@PathVariable("ID") Long ID){
         service.delete(ID);
         return ResponseEntity.ok().build();
     }
-    @PutMapping(path = "/{id}/uploadFile")
-    public ResponseEntity uploadFile(@PathVariable("id") Long ID, MultipartFile file){
+    @PutMapping(path = "/{ID}/uploadFile")
+    public ResponseEntity uploadFile(@PathVariable("ID") Long ID, MultipartFile file){
         Participante participante = service.findByID(ID);
         service.update(participante, file);
         return ResponseEntity.ok().build();

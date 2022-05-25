@@ -61,7 +61,7 @@ public class ParticipanteService {
     }
     public Participante update (Participante p, MultipartFile file){
         //Participante já existe
-        Participante obj = findByID(p.getId());
+        Participante obj = findByID(p.getID());
         
         //Arquivo
         p.setDocumentos(obj.getDocumentos());
@@ -82,7 +82,7 @@ public class ParticipanteService {
     public void delete(Long ID){
        Participante obj = findByID(ID);
        
-        verificaExclusaoParticipanteComIngressos(obj);
+       verificaExclusaoParticipanteComIngressos(obj);
        try{
            repo.delete(obj);
            if(obj.getDocumentos() != null){

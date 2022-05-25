@@ -4,6 +4,7 @@
   lang="pt-br"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 >
   <head th:fragment="imports-css(title)">
     <title th:text="${title}">Sistema de Eventos</title>
@@ -33,50 +34,26 @@
             </svg>
             Sistema de Ingressos para Eventos
           </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Altera navegação"
-          >
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-label="Altera navegação">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li
-                class="nav-item"
-                th:classappend="${pagina == 'eventos' ? 'active' : ''}"
-              >
-                <a class="nav-link" aria-current="page" th:href="@{~/eventos}"
-                  >Eventos</a
-                >
+              <li class="nav-item" th:classappend="${pagina == 'eventos' ? 'active' : ''}" >
+                <a class="nav-link" aria-current="page" th:href="@{~/eventos}">Eventos</a>
               </li>
-              <li
-                class="nav-item"
-                th:classappend="${pagina == 'participantes' ? 'active' : ''}"
-              >
-                <a
-                  class="nav-link"
-                  aria-current="page"
-                  th:href="@{~/participantes}"
-                  >Participantes</a
-                >
+              <li class="nav-item" th:classappend="${pagina == 'participantes' ? 'active' : ''}">
+                <a class="nav-link" aria-current="page" th:href="@{~/participantes}">Participantes</a>
               </li>
-              <li
-                class="nav-item"
-                th:classappend="${pagina == 'funcionarios' ? 'active' : ''}"
-              >
-                <a
-                  class="nav-link"
-                  aria-current="page"
-                  th:href="@{~/funcionarios}"
-                  >Funcionários</a
-                >
+              <li class="nav-item" th:classappend="${pagina == 'funcionarios' ? 'active' : ''}" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link" aria-current="page" th:href="@{~/funcionarios}">Funcionários</a>
+              </li>
+                <li class="nav-item" th:classappend="${pagina == 'meusdados' ? 'active' : ''}">
+                <a class="nav-link" aria-current="page" th:href="@{~/funcionarios/meusdados}">Meus Dados</a>
               </li>
             </ul>
+              <a sec:authorize="isAuthenticated()" class="btn btn-danger" th:href="@{~/logout}" role="button" style="float: right; margin-right: 1rem;">Sair</a>
+              
           </div>
         </nav>
       </div>

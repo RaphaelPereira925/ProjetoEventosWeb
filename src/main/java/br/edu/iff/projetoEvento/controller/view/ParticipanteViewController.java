@@ -42,7 +42,7 @@ public class ParticipanteViewController {
             model.addAttribute("msgErros", result.getAllErrors());
             return "formularioParticipante";
         }
-        participante.setId(0);
+        participante.setID(null);
         try {
             service.save(file, participante);
             model.addAttribute("msgSucesso", "Participante cadastrado com sucesso.");
@@ -66,7 +66,7 @@ public class ParticipanteViewController {
             model.addAttribute("msgErros", result.getAllErrors());
             return "formularioParticipante";
         }
-        participante.setId(ID);
+        participante.setID(null);
         try {
             service.update(participante, file);
             model.addAttribute("msgSucesso", "Participante cadastrado com sucesso.");

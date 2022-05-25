@@ -27,6 +27,9 @@ public class FuncionarioService {
     public List<Funcionario> findAll(){
         return repo.findAll();
     }
+    public Funcionario findByCPF(String CPF){
+        return (Funcionario) repo.findbyCPF(CPF);
+    }
     
     public Funcionario findByID(Long ID){
         
@@ -56,7 +59,7 @@ public class FuncionarioService {
     }
     public Funcionario update (Funcionario f, String senhaAtual, String novaSenha, String ConfirmarNovaSenha){
         //Verifica se funcionário já existe
-        Funcionario obj = findByID(f.getId());
+        Funcionario obj = findByID(f.getID());
         //Verifica permissões nulas
         removePermissoesNulas(f);
         //Verifica alteração da senha
@@ -95,8 +98,11 @@ public class FuncionarioService {
     }
     private void alterarSenha (Funcionario obj, String senhaAtual, String novaSenha, String confirmarNovaSenha){
         
+        BCryptPasswordEncoder encrypt = new BCryptPasswordEncoder();
+        
+        
         if(!senhaAtual.trim().isEmpty() && !novaSenha.trim().isEmpty() && !confirmarNovaSenha.trim().isEmpty()){
-            if(!senhaAtual.equals(obj.getSenha())){
+            if(!encrypt.matches(senhaAtual, obj.getSenha())){
                 throw new RuntimeException("Senha atual está incorreta.");
             }
             if(!novaSenha.equals(confirmarNovaSenha)){

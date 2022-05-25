@@ -1,15 +1,15 @@
 
 package br.edu.iff.projetoEvento.controller.view;
 
-import br.edu.iff.projetoEvento.model.Evento;
 import br.edu.iff.projetoEvento.model.Funcionario;
-import br.edu.iff.projetoEvento.model.TipoStatusEventoEnum;
 import br.edu.iff.projetoEvento.repository.PermissaoRepository;
 import br.edu.iff.projetoEvento.service.FuncionarioService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -53,7 +53,7 @@ public class FuncionarioViewController {
             model.addAttribute("msgErros", new ObjectError("funcionario", "Campos senha e confirmar senha devem ser iguais."));
             return "formulariofuncionario";
         }
-        funcionario.setId(0);
+        funcionario.setID(null);
         try {
             service.save(funcionario);
             model.addAttribute("msgSucesso", "Funcionário cadastrado com sucesso.");
@@ -87,7 +87,7 @@ public class FuncionarioViewController {
             model.addAttribute("msgErros", error);
             return "formulariofuncionario";
         }
-        funcionario.setId(ID);
+        funcionario.setID(null);
         try {
             service.update(funcionario, "", "", "");
             model.addAttribute("msgSucesso", "Funcionário atualizado com sucesso.");
@@ -104,5 +104,52 @@ public class FuncionarioViewController {
     public String deletar(@PathVariable("ID") Long ID){
         service.delete(ID);
         return "redirect:/funcionarios";
+    }
+    
+    
+    //Controller para os meus Dados
+    
+    @GetMapping(path = "/meusdados/")
+    public String getMeusDados (@AuthenticationPrincipal User user, Model model){
+        
+        Funcionario funcionario = service.findByCPF(user.getUsername());
+        model.addAttribute("funcionario", funcionario);
+        
+        return "formularioMeusDados";
+    }
+    @PostMapping(path = "/meusdados")
+    public String atualizarDados (@Valid @ModelAttribute Funcionario funcionario, 
+            BindingResult result, @AuthenticationPrincipal User user, Model model,
+            @RequestParam("senhaAtual") String senhaAtual,
+            @RequestParam("novaSenha") String novaSenha,
+            @RequestParam("confirmaSenha") String confirmaSenha) {
+        
+        List<FieldError> error = new ArrayList<>();
+        
+        for(FieldError fe : result.getFieldErrors()){
+            if((!fe.getField().equals("senha"))&&(!fe.getField().equals("permissoes"))){
+                error.add(fe);
+            }
+        }
+        if (!error.isEmpty()) {
+            model.addAttribute("msgErros", error);
+            return "formularioMeusDados";
+        }
+        Funcionario funcionarioBD = service.findByCPF(user.getUsername());
+        if(funcionarioBD.getID().equals(funcionario.getID())){
+            throw new RuntimeException("Acesso negado.");
+        }
+        try {
+            
+            funcionario.setPermissoes(funcionario.getPermissoes());
+            service.update(funcionario, senhaAtual, novaSenha, confirmaSenha);
+            model.addAttribute("msgSucesso", "Funcionário atualizado com sucesso.");
+            model.addAttribute("funcionario", funcionario);
+            return "formularioMeusDados";
+        } catch (Exception e) {
+            model.addAttribute("msgErros", new ObjectError("funcionario", e.getMessage()));
+            
+            return "formularioMeusDados";
+        }
     }
 }

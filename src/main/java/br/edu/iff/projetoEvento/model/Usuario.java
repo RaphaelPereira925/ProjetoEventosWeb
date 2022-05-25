@@ -27,7 +27,7 @@ public abstract class Usuario implements Serializable{
     
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long ID;
+    private Long ID;
     @Column(nullable = false, unique = false, updatable = true, length = 150) //Professor não sei se precisa colocar o updatable aqui. Coloquei pois é um atributo que pode ser alterado segundo minhas regras de negócio.
     @NotBlank(message = "O campo Nome é obrigatório.")
     @Length(max = 150, message = "O campo Nome deve ter no máximo 150 caracteres.")
@@ -50,11 +50,11 @@ public abstract class Usuario implements Serializable{
     @Valid
     private Contato contato;
 
-    public long getId() {
+    public Long getID() {
         return ID;
     }
 
-    public void setId(long ID) {
+    public void setID(Long ID) {
         this.ID = ID;
     }
 
