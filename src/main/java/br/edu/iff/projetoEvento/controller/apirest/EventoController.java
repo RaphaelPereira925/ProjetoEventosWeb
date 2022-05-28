@@ -32,27 +32,27 @@ public class EventoController {
     }
     
     @GetMapping(path = "/{id}")
-    public ResponseEntity getOne(@PathVariable("id") Long ID){
-        return ResponseEntity.ok(service.findByID(ID));
+    public ResponseEntity getOne(@PathVariable("id") Long id){
+        return ResponseEntity.ok(service.findById(id));
     }
     
     @PostMapping
     public ResponseEntity save(@Valid @RequestBody Evento evento){
-        evento.setID(null);
+        evento.setId(null);
         service.save(evento);
         return ResponseEntity.status(HttpStatus.CREATED).body(evento);
     }
     
     @PutMapping(path = "/{id}")
-    public ResponseEntity update(@PathVariable("id") Long ID, @Valid @RequestBody Evento evento){
-        evento.setID(ID);
+    public ResponseEntity update(@PathVariable("id") Long id, @Valid @RequestBody Evento evento){
+        evento.setId(id);
         service.update(evento);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long ID){
-        service.delete(ID);
+    public ResponseEntity delete(@PathVariable("id") Long id){
+        service.delete(id);
         return ResponseEntity.ok().build();
     }
     

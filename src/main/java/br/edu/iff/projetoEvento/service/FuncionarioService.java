@@ -31,9 +31,9 @@ public class FuncionarioService {
         return (Funcionario) repo.findbyCPF(CPF);
     }
     
-    public Funcionario findByID(Long ID){
+    public Funcionario findById(Long id){
         
-        Optional<Funcionario> resultado = repo.findById(ID);
+        Optional<Funcionario> resultado = repo.findById(id);
         if (resultado.toString().isEmpty()){
             throw new NotFoundException("Funcionário não encontrado.");
         }
@@ -59,7 +59,7 @@ public class FuncionarioService {
     }
     public Funcionario update (Funcionario f, String senhaAtual, String novaSenha, String ConfirmarNovaSenha){
         //Verifica se funcionário já existe
-        Funcionario obj = findByID(f.getID());
+        Funcionario obj = findById(f.getId());
         //Verifica permissões nulas
         removePermissoesNulas(f);
         //Verifica alteração da senha
@@ -80,9 +80,9 @@ public class FuncionarioService {
         }
         
     }
-    public void delete(Long ID){
-       Funcionario obj = findByID(ID);
-        verificaExclusaoFuncinarioComIngressos(obj);
+    public void delete(Long id){
+       Funcionario obj = findById(id);
+        //verificaExclusaoFuncinarioComIngressos(obj);
        
        try{
            repo.delete(obj);
@@ -112,14 +112,17 @@ public class FuncionarioService {
         }
         
     }
+    
+/*
     private void verificaExclusaoFuncinarioComIngressos(Funcionario f) {
         if (!f.getIngressos().isEmpty()) {
             throw new RuntimeException("Funcionário possui ingresso. Não pode ser excluído.");
         }
     }
+*/
     public void removePermissoesNulas(Funcionario f){
         f.getPermissoes().removeIf( (Permissao p) -> {
-            return p.getID()==null;
+            return p.getId()==null;
         });
         if(f.getPermissoes().isEmpty()){
             throw new RuntimeException("Funcionario deve conter no mínimo 1 permissão.");

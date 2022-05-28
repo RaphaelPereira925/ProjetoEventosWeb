@@ -49,9 +49,9 @@ public class IngressoService {
         return repo.findAll(p).toList();
     }
     
-    public Ingresso findByID(Long ID){
+    public Ingresso findById(Long id){
         
-        Optional<Ingresso> resultado = repo.findById(ID);
+        Optional<Ingresso> resultado = repo.findById(id);
         if (resultado.toString().isEmpty()){
             throw new NotFoundException("Ingresso não encontrado.");
         }
@@ -66,18 +66,18 @@ public class IngressoService {
        }
     }
     public Ingresso update (Ingresso i){
-        Ingresso obj = findByID(i.getID());
+        Ingresso obj = findById(i.getId());
         
         try {
-            i.setID(obj.getID());
+            i.setId(obj.getId());
             return repo.save(i);
         } catch (Exception Ex) {
             throw new RuntimeException("Falha ao atualizar o Ingresso.");
         }
         
     }
-    public void delete(Long ID){
-       Ingresso obj = findByID(ID);
+    public void delete(Long id){
+       Ingresso obj = findById(id);
        
        try{
            repo.delete(obj);

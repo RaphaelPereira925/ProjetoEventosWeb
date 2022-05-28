@@ -31,10 +31,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Evento implements Serializable{
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long id;
     @Column(nullable = false, length = 100)
     @NotBlank(message = "O campo nome é obrigatório.")
     @Length(max = 100, message = "O campo nome deve ter no máximo 100 caracteres.")
@@ -71,12 +71,12 @@ public class Evento implements Serializable{
     private List<Ingresso> ingressos = new ArrayList<>();
     
     
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -148,7 +148,7 @@ public class Evento implements Serializable{
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.ID);
+        hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -164,7 +164,7 @@ public class Evento implements Serializable{
             return false;
         }
         final Evento other = (Evento) obj;
-        if (!Objects.equals(this.ID, other.ID)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

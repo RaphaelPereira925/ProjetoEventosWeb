@@ -53,7 +53,7 @@ public class FuncionarioViewController {
             model.addAttribute("msgErros", new ObjectError("funcionario", "Campos senha e confirmar senha devem ser iguais."));
             return "formulariofuncionario";
         }
-        funcionario.setID(null);
+        funcionario.setId(null);
         try {
             service.save(funcionario);
             model.addAttribute("msgSucesso", "Funcionário cadastrado com sucesso.");
@@ -66,15 +66,15 @@ public class FuncionarioViewController {
         }
         
     }
-    @GetMapping(path = "/funcionario/{ID}")
-    public String alterar (@PathVariable("ID") Long ID, Model model){
+    @GetMapping(path = "/funcionario/{id}")
+    public String alterar (@PathVariable("id") Long id, Model model){
         model.addAttribute("funcionario", new Funcionario());
         return "formulariofuncionario";
     }
-    @PostMapping(path = "/funcionario/{ID}")
+    @PostMapping(path = "/funcionario/{id}")
     public String atualizar (@Valid @ModelAttribute Funcionario funcionario, 
             BindingResult result,
-            @PathVariable("ID") Long ID, Model model) {
+            @PathVariable("id") Long id, Model model) {
         
         List<FieldError> error = new ArrayList<>();
         
@@ -87,7 +87,7 @@ public class FuncionarioViewController {
             model.addAttribute("msgErros", error);
             return "formulariofuncionario";
         }
-        funcionario.setID(null);
+        funcionario.setId(null);
         try {
             service.update(funcionario, "", "", "");
             model.addAttribute("msgSucesso", "Funcionário atualizado com sucesso.");
@@ -100,9 +100,9 @@ public class FuncionarioViewController {
         }
         
     }
-    @GetMapping(path = "/{ID}/deletar")
-    public String deletar(@PathVariable("ID") Long ID){
-        service.delete(ID);
+    @GetMapping(path = "/{id}/deletar")
+    public String deletar(@PathVariable("id") Long id){
+        service.delete(id);
         return "redirect:/funcionarios";
     }
     
@@ -136,7 +136,7 @@ public class FuncionarioViewController {
             return "formularioMeusDados";
         }
         Funcionario funcionarioBD = service.findByCPF(user.getUsername());
-        if(funcionarioBD.getID().equals(funcionario.getID())){
+        if(funcionarioBD.getId().equals(funcionario.getId())){
             throw new RuntimeException("Acesso negado.");
         }
         try {

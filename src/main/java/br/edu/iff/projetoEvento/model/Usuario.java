@@ -23,11 +23,11 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario implements Serializable{
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long id;
     @Column(nullable = false, unique = false, updatable = true, length = 150) //Professor não sei se precisa colocar o updatable aqui. Coloquei pois é um atributo que pode ser alterado segundo minhas regras de negócio.
     @NotBlank(message = "O campo Nome é obrigatório.")
     @Length(max = 150, message = "O campo Nome deve ter no máximo 150 caracteres.")
@@ -50,12 +50,12 @@ public abstract class Usuario implements Serializable{
     @Valid
     private Contato contato;
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -101,7 +101,7 @@ public abstract class Usuario implements Serializable{
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 29 * hash + (int) (this.ID ^ (this.ID >>> 32));
+        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -117,7 +117,7 @@ public abstract class Usuario implements Serializable{
             return false;
         }
         final Usuario other = (Usuario) obj;
-        if (this.ID != other.ID) {
+        if (this.id != other.id) {
             return false;
         }
         return true;

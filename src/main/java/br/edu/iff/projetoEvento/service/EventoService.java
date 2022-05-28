@@ -26,9 +26,9 @@ public class EventoService {
         return repo.findAll();
     }
     
-    public Evento findByID(Long ID){
+    public Evento findById(Long id){
         
-        Optional<Evento> resultado = repo.findById(ID);
+        Optional<Evento> resultado = repo.findById(id);
         if (resultado.toString().isEmpty()){
             throw new NotFoundException("Evento não encontrado.");
         }
@@ -44,21 +44,21 @@ public class EventoService {
     }
     
     public Evento update (Evento e){
-        Evento obj = findByID(e.getID());
+        Evento obj = findById(e.getId());
         
         List<Ingresso> ingressoAtuais = obj.getIngressos();
         ingressoAtuais.removeAll(e.getIngressos());
         
         try {
-            e.setID(obj.getID());
+            e.setId(obj.getId());
             return repo.save(e);
         } catch (Exception Ex) {
             throw new RuntimeException("Falha ao atualizar o Evento.");
         }
         
     }
-    public void delete(Long ID){
-       Evento obj = findByID(ID);
+    public void delete(Long id){
+       Evento obj = findById(id);
        
        verificaExclusaoEventosComIngressos(obj.getIngressos());
        try{
@@ -67,6 +67,8 @@ public class EventoService {
            throw new RuntimeException("Falha ao deletar o Evento.");
        }
    }
+    
+
     private void verificaExclusaoEventosComIngressos(List<Ingresso> ingressos){
         
         if(!ingressos.isEmpty()){

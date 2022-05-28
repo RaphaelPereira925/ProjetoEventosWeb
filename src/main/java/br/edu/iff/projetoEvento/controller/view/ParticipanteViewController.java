@@ -42,7 +42,7 @@ public class ParticipanteViewController {
             model.addAttribute("msgErros", result.getAllErrors());
             return "formularioParticipante";
         }
-        participante.setID(null);
+        participante.setId(null);
         try {
             service.save(file, participante);
             model.addAttribute("msgSucesso", "Participante cadastrado com sucesso.");
@@ -53,20 +53,20 @@ public class ParticipanteViewController {
             return "formularioParticipante";
         }
     }
-    @GetMapping(path = "/participante/{ID}")
-    public String editar(@PathVariable("ID") Long ID, Model model) {
-        model.addAttribute("participante", service.findByID(ID));
+    @GetMapping(path = "/participante/{id}")
+    public String editar(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("participante", service.findById(id));
         return "formularioParticipante";
     }
-    @PostMapping(path = "/participante/{ID}")
+    @PostMapping(path = "/participante/{id}")
     public String atualizar (@Valid @ModelAttribute Participante participante, BindingResult result,
-            @PathVariable("ID") Long ID, @RequestParam("file") MultipartFile file, Model model) {
+            @PathVariable("id") Long id, @RequestParam("file") MultipartFile file, Model model) {
         
         if(result.hasErrors()){
             model.addAttribute("msgErros", result.getAllErrors());
             return "formularioParticipante";
         }
-        participante.setID(null);
+        participante.setId(null);
         try {
             service.update(participante, file);
             model.addAttribute("msgSucesso", "Participante cadastrado com sucesso.");
@@ -77,9 +77,9 @@ public class ParticipanteViewController {
             return "formularioParticipante";
         }
     }
-    @GetMapping(path = "{ID}/deletar")
-    public String deletar(@PathVariable("ID") Long ID){
-        service.delete(ID);
+    @GetMapping(path = "{id}/deletar")
+    public String deletar(@PathVariable("id") Long id){
+        service.delete(id);
         return "redirect:/participantes";
     }
     

@@ -18,11 +18,11 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Ingresso implements Serializable{
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long id;
     @Column(nullable = false, length = 20)
     @Enumerated (EnumType.STRING)
     private TipoIngressoEnum tipoIngresso;
@@ -43,12 +43,12 @@ public class Ingresso implements Serializable{
     @NotNull(message = "Campo funcionario é obrigatório.")
     private Funcionario funcionario;
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public TipoIngressoEnum getTipoIngresso() {
@@ -96,7 +96,7 @@ public class Ingresso implements Serializable{
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.ID);
+        hash = 89 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -112,7 +112,7 @@ public class Ingresso implements Serializable{
             return false;
         }
         final Ingresso other = (Ingresso) obj;
-        if (!Objects.equals(this.ID, other.ID)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

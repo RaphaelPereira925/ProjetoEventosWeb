@@ -31,38 +31,38 @@ public class FuncionarioController {
         return ResponseEntity.ok(service.findAll(page, size));
     }
     
-    @GetMapping(path = "/{ID}")
-    public ResponseEntity getOne(@PathVariable("ID") Long ID){
-        return ResponseEntity.ok(service.findByID(ID));
+    @GetMapping(path = "/{id}")
+    public ResponseEntity getOne(@PathVariable("id") Long id){
+        return ResponseEntity.ok(service.findById(id));
     }
     
     @PostMapping
     public ResponseEntity save(@Valid @RequestBody Funcionario funcionario){
-        funcionario.setID(null);
+        funcionario.setId(null);
         service.save(funcionario);
         return ResponseEntity.status(HttpStatus.CREATED).body(funcionario);
     }
     
-    @PutMapping(path = "/{ID}")
-    public ResponseEntity update(@PathVariable("ID") Long ID, @RequestBody Funcionario funcionario){
-        funcionario.setID(ID);
+    @PutMapping(path = "/{id}")
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Funcionario funcionario){
+        funcionario.setId(id);
         service.update(funcionario, "", "", "");
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
-    @DeleteMapping(path = "/{ID}")
-    public ResponseEntity delete(@PathVariable("ID") Long ID){
-        service.delete(ID);
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity delete(@PathVariable("id") Long id){
+        service.delete(id);
         return ResponseEntity.ok().build(); 
     }
     
-    @PutMapping(path = "/{ID}/alterarSenha")
-    public ResponseEntity alterarSenha(@PathVariable("ID") Long ID,
+    @PutMapping(path = "/{id}/alterarSenha")
+    public ResponseEntity alterarSenha(@PathVariable("id") Long id,
             @RequestParam(name = "senhaAtual", defaultValue = "", required = true) String senhaAtual,
             @RequestParam(name = "novaSenha", defaultValue = "", required = true) String novaSenha,
             @RequestParam(name = "confirmarNovaSenha", defaultValue = "", required = true) String confirmarNovaSenha){
         
-        Funcionario f = service.findByID(ID);
+        Funcionario f = service.findById(id);
         service.update(f, senhaAtual, novaSenha, confirmarNovaSenha);
         return ResponseEntity.ok().build();
     }

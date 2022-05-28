@@ -32,27 +32,27 @@ public class IngressoController {
         
         return ResponseEntity.ok(service.findAll(page, size, clienteID, funcionarioID, eventoID));        
     }
-    @GetMapping(path = "/{ID}")
-    public ResponseEntity getOne(@PathVariable("ID") Long ID){
-        return ResponseEntity.ok(service.findByID(ID));
+    @GetMapping(path = "/{id}")
+    public ResponseEntity getOne(@PathVariable("id") Long id){
+        return ResponseEntity.ok(service.findById(id));
     }
     @PostMapping
     public ResponseEntity save(@RequestBody Ingresso ingresso){
-        ingresso.setID(null);
+        ingresso.setId(null);
         service.save(ingresso);
         return ResponseEntity.status(HttpStatus.CREATED).body(ingresso);
     }
     
-    @PutMapping(path = "/{ID}")
-    public ResponseEntity update(@PathVariable("ID") Long ID, @RequestBody Ingresso ingresso){
-        ingresso.setID(ID);
+    @PutMapping(path = "/{id}")
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Ingresso ingresso){
+        ingresso.setId(id);
         service.update(ingresso);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
-    @DeleteMapping(path = "/{ID}")
-    public ResponseEntity delete(@PathVariable("ID") Long ID){
-        service.delete(ID);
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity delete(@PathVariable("id") Long id){
+        service.delete(id);
         return ResponseEntity.ok().build();
     }
 }

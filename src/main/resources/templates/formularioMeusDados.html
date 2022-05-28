@@ -26,7 +26,7 @@
                 <div class="card border-info mb-3" style="margin-top: 1rem; margin-left: 1rem; margin-bottom: 1rem; margin-right: 1rem; background-color: #E8F9FD;">
                     <form class="card-body" th:object="${funcionario}" th:action="@{~/funcionarios/meusdados}" method="post">
                         <div>
-                            <input type="hidden" th:field="*{Id}"/>
+                            <input type="hidden" th:field="*{id}"/>
                             <!--Aqui inicia os dados da Classe do Participante-->
                             <div class="row"> 
                                 <div class="form-group col-md-6">

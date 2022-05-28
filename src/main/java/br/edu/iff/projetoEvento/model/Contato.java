@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Embeddable
 public class Contato implements Serializable{    
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
     
     @Column(nullable = false, length = 14)
     @NotBlank(message = "O campo cel é obrigatório.")

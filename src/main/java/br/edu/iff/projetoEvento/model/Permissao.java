@@ -11,20 +11,20 @@ import javax.persistence.Id;
 
 @Entity
 public class Permissao implements Serializable{
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long id;
     @Column(nullable = false)
     private String nome;
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -38,7 +38,7 @@ public class Permissao implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 73 * hash + Objects.hashCode(this.ID);
+        hash = 73 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -54,7 +54,7 @@ public class Permissao implements Serializable{
             return false;
         }
         final Permissao other = (Permissao) obj;
-        if (!Objects.equals(this.ID, other.ID)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

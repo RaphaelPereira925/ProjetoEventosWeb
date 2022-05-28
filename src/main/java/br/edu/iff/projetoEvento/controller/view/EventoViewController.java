@@ -45,7 +45,7 @@ public class EventoViewController {
             model.addAttribute("msgErros", result.getAllErrors());
             return "formularioEvento";
         }
-        evento.setID(null);
+        evento.setId(null);
         try {
             service.save(evento);
             model.addAttribute("msgSucesso", "Evento cadastrado com sucesso.");
@@ -58,22 +58,22 @@ public class EventoViewController {
         }
         
     }
-    @GetMapping(path = "/evento/{ID}")
-    public String alterar (@PathVariable("ID") Long ID,Model model) {
-        model.addAttribute("evento", service.findByID(ID));
+    @GetMapping(path = "/evento/{id}")
+    public String alterar (@PathVariable("id") Long id,Model model) {
+        model.addAttribute("evento", service.findById(id));
         model.addAttribute("tipoStatus", TipoStatusEventoEnum.values());
         return "formularioEvento";
     }
     
-    @PostMapping(path = "/evento/{ID}")
-    public String update(@Valid @ModelAttribute Evento evento, BindingResult result, @PathVariable("ID") Long ID, Model model) {
+    @PostMapping(path = "/evento/{id}")
+    public String update(@Valid @ModelAttribute Evento evento, BindingResult result, @PathVariable("id") Long id, Model model) {
         //valores de retorno padrão
         model.addAttribute("tipoStatus", TipoStatusEventoEnum.values());
         if (result.hasErrors()) {
             model.addAttribute("msgErros", result.getAllErrors());
             return "formularioEvento";
         }
-        evento.setID(ID);
+        evento.setId(id);
         try {
             service.update(evento);
             model.addAttribute("msgSucesso", "Evento atualizado com sucesso.");
@@ -84,9 +84,9 @@ public class EventoViewController {
             return "formularioEvento";
         }
     }
-    @GetMapping(path = "/{ID}/deletar")
-    public String deletar(@PathVariable("ID") Long ID) {
-        service.delete(ID);
+    @GetMapping(path = "/{id}/deletar")
+    public String deletar(@PathVariable("id") Long id) {
+        service.delete(id);
         return "redirect:/eventos";
     }
     

@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IngressoRepository extends JpaRepository<Ingresso, Long>{
     
-    @Query("SELECT e FROM Evento e Where e.ID = :ID")
-    public List<Ingresso> findByIngressosByEvento(@Param("ID") Long ID);
+    @Query("SELECT e FROM Evento e Where e.id = :id")
+    public List<Ingresso> findByIngressosByEvento(@Param("id") Long ID);
     
     public List<Ingresso> findByFuncionarioId(Long funcionarioId, Pageable page);
     
-    public List<Ingresso> findByParticipanteId(Long participanteID, Pageable page);
+    public List<Ingresso> findByParticipanteId(Long participanteId, Pageable page);
     
     public List<Ingresso> findByParticipanteIdAndFuncionarioId(Long participanteId, Long funcionarioId, Pageable page);
 

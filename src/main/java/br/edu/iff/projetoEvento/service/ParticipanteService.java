@@ -31,9 +31,9 @@ public class ParticipanteService {
         return repo.findAll();
     }
     
-    public Participante findByID(Long ID){
+    public Participante findById(Long id){
         
-        Optional<Participante> resultado = repo.findById(ID);
+        Optional<Participante> resultado = repo.findById(id);
         if (resultado.toString().isEmpty()){
             throw new NotFoundException("Participante não encontrado.");
         }
@@ -61,7 +61,7 @@ public class ParticipanteService {
     }
     public Participante update (Participante p, MultipartFile file){
         //Participante já existe
-        Participante obj = findByID(p.getID());
+        Participante obj = findById(p.getId());
         
         //Arquivo
         p.setDocumentos(obj.getDocumentos());
@@ -79,10 +79,11 @@ public class ParticipanteService {
         }
         
     }
-    public void delete(Long ID){
-       Participante obj = findByID(ID);
+    public void delete(Long id){
+       Participante obj = findById(id);
        
-       verificaExclusaoParticipanteComIngressos(obj);
+        //verificaExclusaoParticipanteComIngressos(obj);
+       
        try{
            repo.delete(obj);
            if(obj.getDocumentos() != null){
@@ -113,9 +114,13 @@ public class ParticipanteService {
             throw new RuntimeException("CPF já cadastrado.");
         }
     }
+    
+/*    
     private void verificaExclusaoParticipanteComIngressos(Participante p) {
         if (!p.getIngressos().isEmpty()) {
             throw new RuntimeException("Participante possui ingresso. Não pode ser excluído.");
         }
     }
+
+*/
 }

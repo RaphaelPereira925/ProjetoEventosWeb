@@ -144,6 +144,20 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         i.setFuncionario(f);
         i.setParticipante(p);
         ingressoRepo.save(i);
+        
+/*
+        Ingresso i2 = new Ingresso();
+        i2.setEvento(eE);
+        i2.setFuncionario(f);
+        i2.setParticipante(p);
+        
+        
+        ArrayList<Ingresso> lis = new ArrayList();
+        
+        lis.add(i);
+        lis.add(i2);
+        ingressoRepo.saveAll(lis);
+*/
     }
     
 }

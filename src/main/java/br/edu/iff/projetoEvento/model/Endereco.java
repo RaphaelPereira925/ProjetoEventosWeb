@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Embeddable
 public class Endereco implements Serializable{
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
 
     @Column(nullable = false, length = 100)
     @NotBlank(message = "O campo rua é obrigatório.")
