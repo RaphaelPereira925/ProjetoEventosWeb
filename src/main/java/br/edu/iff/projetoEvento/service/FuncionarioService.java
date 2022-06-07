@@ -42,6 +42,7 @@ public class FuncionarioService {
     public Funcionario save (Funcionario f){
        //Verifica se o CPF já está cadastrado
        verificaCPFCadastrado(f.getCPF());
+       removePermissoesNulas(f);
        
        try{ 
         f.setSenha(new BCryptPasswordEncoder().encode(f.getSenha()));

@@ -5,10 +5,82 @@
         <title>...</title>
     </head>
     <body>
-        <div th:replace="~{fragmentos :: barramenu(pagina='eventos')}"/>
-        <div class="container" >
+        <div th:replace="~{fragmentos :: barramenu(pagina='eventos')}"></div>
+        
+        <div class="container">
+            <div class="card-header" style="margin-top: 3rem;">
+                <h5>
+                    <svg xmlns="http://www.w3.org/2000/svg" style="padding: 0 10px;" width="60" height="60" fill="currentColor" class="bi bi-ticket-perforated-fill" viewBox="0 0 16 16">
+                        <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5Zm4-1v1h1v-1H4Zm1 3v-1H4v1h1Zm7 0v-1h-1v1h1Zm-1-2h1v-1h-1v1Zm-6 3H4v1h1v-1Zm7 1v-1h-1v1h1Zm-7 1H4v1h1v-1Zm7 1v-1h-1v1h1Zm-8 1v1h1v-1H4Zm7 1h1v-1h-1v1Z"/>
+                     </svg>
+                    Cadastro de Ingressos
+                    <a class="btn btn-outline-info float-right" th:href="@{~/eventos/{evento}/ingressos/(evento = ${IDevento})}" role="buttom">Voltar</a>
+                </h5>
+            </div>
+            
+            <!--Mensagens de Erro virão aqui-->
+            <div th:replace="fragmentos :: mensagens"></div>
+            <div class="card">
+                <div class="card border-info mb-3" style="margin-top: 1rem; margin-left: 1rem; margin-bottom: 1rem; margin-right: 1rem; background-color: #E8F9FD;">
+                    <form class="card-body" th:object="${ingresso}" th:action="@{~/eventos/{evento}/ingressos/ingresso{id}(id=${ingresso.id}, evento=${IDevento})}" method="post">
+                        <input type="hidden" th:field="*{id}"/>                
+                        <div class="form-row">
+                            
+                            
+                            <div class="row">   
+                                <div class="form-group col-md-4">
+                                    <label>Participante</label>
+                                    <select class="form-select" th:field="*{participante.id}">
+                                        <option th:each="participante : ${participantes}" th:text="${participante.nome}" th:value="${participante.id}"></option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label>Funcionário</label>
+                                    <select class="form-select" th:field="*{funcionario.id}">
+                                        <option th:each="funcionario : ${funcionarios}" th:text="${funcionario.nome}" th:value="${funcionario.id}"></option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label>Evento</label>
+                                    <select class="form-select" th:field="*{evento.id}">
+                                        <option th:each="evento : ${eventos}" th:text="${evento.nome}" th:value="${evento.id}"></option>
+                                    </select>
+                                </div>
+                            
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    <label for="valor">Valor</label>
+                                    <input th:field="*{valor}" type="number" class="form-control" required="required"/>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Tipo do Ingresso</label>
+                                    <!--Aqui eu atribuo as opções do ENUM associando a variável ingresso com o th:field-->
+                                    <select class="form-select" th:field="*{tipoIngresso}">
+                                        <!--Aqui eu exibo as opções de ENUM de TipoIngresso com um for (th:each) que percorre as opções.-->
+                                        <option th:each="t : ${tipoIngresso}" th:value="${t}" th:text="${t}">content</option>
+                                    </select>
+                                </div>
+                            </div>
+                          
+                        </div>
+                        <div class="card-footer border-info mb-3" style="margin-top: 3rem;"><br>
+                            <input type="submit" class="btn btn btn-outline-dark" value="salvar"/>   
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            
+            
+            
+            
             
         </div>
+       
         
         
         <div th:replace="~{fragmentos :: imports-js}"/>

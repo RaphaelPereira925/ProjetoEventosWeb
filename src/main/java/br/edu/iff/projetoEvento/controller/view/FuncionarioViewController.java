@@ -39,11 +39,14 @@ public class FuncionarioViewController {
     @GetMapping(path = "/funcionario")
     public String cadastro (Model model){
         model.addAttribute("funcionario", new Funcionario());
+        model.addAttribute("permissoes", repo.findAll());
         return "formulariofuncionario";
     }
     @PostMapping(path = "/funcionario")
     public String save(@Valid @ModelAttribute Funcionario funcionario, BindingResult result,
             @RequestParam("confirmarSenha") String confirmarSenha, Model model) {
+        
+        model.addAttribute("permissoes", repo.findAll());
         
         if (result.hasErrors()) {
             model.addAttribute("msgErros", result.getAllErrors());
@@ -68,13 +71,16 @@ public class FuncionarioViewController {
     }
     @GetMapping(path = "/funcionario/{id}")
     public String alterar (@PathVariable("id") Long id, Model model){
-        model.addAttribute("funcionario", new Funcionario());
+        model.addAttribute("funcionario", service.findById(id));
+        model.addAttribute("permissoes", repo.findAll());
         return "formulariofuncionario";
     }
     @PostMapping(path = "/funcionario/{id}")
     public String atualizar (@Valid @ModelAttribute Funcionario funcionario, 
             BindingResult result,
             @PathVariable("id") Long id, Model model) {
+        
+        model.addAttribute("permissoes", repo.findAll());
         
         List<FieldError> error = new ArrayList<>();
         
@@ -109,7 +115,7 @@ public class FuncionarioViewController {
     
     //Controller para os meus Dados
     
-    @GetMapping(path = "/meusdados/")
+    @GetMapping(path = "/meusdados")
     public String getMeusDados (@AuthenticationPrincipal User user, Model model){
         
         Funcionario funcionario = service.findByCPF(user.getUsername());
@@ -122,7 +128,7 @@ public class FuncionarioViewController {
             BindingResult result, @AuthenticationPrincipal User user, Model model,
             @RequestParam("senhaAtual") String senhaAtual,
             @RequestParam("novaSenha") String novaSenha,
-            @RequestParam("confirmaSenha") String confirmaSenha) {
+            @RequestParam("confirmarNovaSenha") String confirmaSenha) {
         
         List<FieldError> error = new ArrayList<>();
         

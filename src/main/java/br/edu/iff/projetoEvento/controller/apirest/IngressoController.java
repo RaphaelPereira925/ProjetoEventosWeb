@@ -26,11 +26,11 @@ public class IngressoController {
     public ResponseEntity getAll(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
-            @RequestParam(name = "clienteID", defaultValue = "0", required = false) Long clienteID,
+            @RequestParam(name = "participanteID", defaultValue = "0", required = false) Long participanteID,
             @RequestParam(name = "funcionarioID", defaultValue = "0", required = false) Long funcionarioID,
             @RequestParam(name = "eventoID", defaultValue = "0", required = false) Long eventoID){
         
-        return ResponseEntity.ok(service.findAll(page, size, clienteID, funcionarioID, eventoID));        
+        return ResponseEntity.ok(service.findAll(page, size, participanteID, funcionarioID, eventoID));        
     }
     @GetMapping(path = "/{id}")
     public ResponseEntity getOne(@PathVariable("id") Long id){

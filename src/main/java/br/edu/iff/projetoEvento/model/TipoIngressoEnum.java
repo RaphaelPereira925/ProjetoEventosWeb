@@ -6,5 +6,5 @@ public enum TipoIngressoEnum {
     PIPOCA,
     VIP, 
     CAMAROTE,
-    NAO_APLICAVEL;
+    NÃO_APLICÁVEL;
 }

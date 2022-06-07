@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping(path = "/pdf")
+@RequestMapping(path = "/files")
 public class ArquivosController {
 @GetMapping(path = "/pdf/{nome}")
     public void getPdfFile(@PathVariable("nome") String nome, HttpServletResponse response){

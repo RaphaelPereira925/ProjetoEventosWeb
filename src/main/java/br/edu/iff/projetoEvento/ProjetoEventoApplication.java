@@ -80,7 +80,7 @@ public class ProjetoEventoApplication implements CommandLineRunner{
        p.setContato(c);
        p.setEndereco(e);
        //Não sei necessariamente se setar documentos seria nesse sentido
-       p.setDocumentos(MediaType.MULTIPART_FORM_DATA_VALUE);
+       p.setDocumentos("433.504.690-19");
        pariticipanteRepo.save(p);
           
         //Funcionário
@@ -145,19 +145,7 @@ public class ProjetoEventoApplication implements CommandLineRunner{
         i.setParticipante(p);
         ingressoRepo.save(i);
         
-/*
-        Ingresso i2 = new Ingresso();
-        i2.setEvento(eE);
-        i2.setFuncionario(f);
-        i2.setParticipante(p);
-        
-        
-        ArrayList<Ingresso> lis = new ArrayList();
-        
-        lis.add(i);
-        lis.add(i2);
-        ingressoRepo.saveAll(lis);
-*/
+
     }
     
 }

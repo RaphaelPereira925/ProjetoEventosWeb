@@ -46,7 +46,7 @@
                             
                             <span th:text="${'Data: '+evento.dataHora}+' horas.'"></span><br>
                              
-                        </div><br>
+                        </div><br>                                          
                         <a class="btn btn-outline-info float-right" th:href="@{~/eventos/{IDevento}/ingressos(IDevento = ${evento.id})}" role="buttom">Ingressos</a>
                         <a class="btn btn-outline-info float-right" th:href="@{'~/eventos/evento/'+${evento.id}}" role="buttom">Editar</a>
                         <a class="btn btn-outline-info float-right" th:href="@{'~/eventos/'+${evento.id}+'/deletar'}" role="buttom" onclick="return confirm('Deseja realmente excluir esse Evento?')">Deletar</a>
